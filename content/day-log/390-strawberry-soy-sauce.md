@@ -2,7 +2,7 @@
 
 title: "#390 いちごのしょうゆ"
 
-date: 2026-09-04T14:12:00+09:00
+date: 2026-09-04
 
 draft: false
 
@@ -46,9 +46,9 @@ keywords:
 
 
 
-\*\*参考\*\*  
+\*\*参考\*\*
 
-（いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？  
+（いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？
 
 \[https://www.asahi.com/articles/DA3S16538020.html](https://www.asahi.com/articles/DA3S16538020.html)
 
