@@ -1,0 +1,39 @@
+baseURL = 'https://example.org/'
+languageCode = 'ja-jp'
+title = '北澤茉奈のホームページ'
+theme = 'PaperMod'
+
+[[menu.main]]
+  name = 'Home'
+  url = '/'
+  weight = 1
+
+[[menu.main]]
+  name = 'Information'
+  url = '/information/'
+  weight = 2
+
+[[menu.main]]
+  name = 'Profile'
+  url = '/profile/'
+  weight = 3
+
+[[menu.main]]
+  name = 'Day Log'
+  url = '/day-log/'
+  weight = 4
+
+[[menu.main]]
+  name = 'Keywords'
+  url = '/keywords/'
+  weight = 5
+
+[[menu.main]]
+  name = 'Book Log'
+  url = '/book-log/'
+  weight = 6
+
+[[menu.main]]
+  name = 'Conference Log: Photos'
+  url = '/conference-log/'
+  weight = 7

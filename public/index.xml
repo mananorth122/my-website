@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>北澤茉奈のホームページ</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on 北澤茉奈のホームページ</description>
+    <generator>Hugo</generator>
+    <language>ja-jp</language>
+    <lastBuildDate>Fri, 04 Sep 2026 13:29:21 +0900</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Keywords</title>
+      <link>http://localhost:1313/keywords/</link>
+      <pubDate>Fri, 04 Sep 2026 13:29:21 +0900</pubDate>
+      <guid>http://localhost:1313/keywords/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Information</title>
+      <link>http://localhost:1313/information/</link>
+      <pubDate>Fri, 04 Sep 2026 13:29:20 +0900</pubDate>
+      <guid>http://localhost:1313/information/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Profile</title>
+      <link>http://localhost:1313/profile/</link>
+      <pubDate>Fri, 04 Sep 2026 13:29:20 +0900</pubDate>
+      <guid>http://localhost:1313/profile/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
