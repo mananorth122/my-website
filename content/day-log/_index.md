@@ -1,10 +1,10 @@
-\---
++++
 
 title: "Day Log"
 
 draft: false
 
-\---
++++
 
 
 
