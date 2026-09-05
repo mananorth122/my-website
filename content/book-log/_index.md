@@ -1,14 +1,4 @@
-\---
-
-title: "Book Log"
-
-draft: false
-
-\---
-
-
-
-<p>旅先で出会ったり、その時々に気になった本を読みながら、心に残ったフレーズを記録しています。</p>
+旅先で出会ったり、その時々に気になった本を読みながら、心に残ったフレーズを記録しています。
 
 
 
@@ -34,7 +24,7 @@ draft: false
 
 &#x20;   <h3 style="margin: 0 0 0.4em 0; font-size: 1.2em;">
 
-&#x20;     <a href="/book-log/2026-08-28-kanjou/" style="text-decoration: none; color: inherit;">人は「感情」から老化する</a>
+&#x20;     <a href="/book-log/2026-08-28-ha-kanjou-kara-roukasuru/" style="text-decoration: none; color: inherit;">人は「感情」から老化する</a>
 
 &#x20;   </h3>
 

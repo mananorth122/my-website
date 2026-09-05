@@ -4,15 +4,10 @@ date = 2026-08-28
 draft = false
 +++
 
-<div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 2em;">
-  <div style="flex: 0 0 240px; max-width: 100%;">
-    <img src="/images/book1.jpg" alt="人は「感情」から老化する" style="width: 100%; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
-  </div>
-  <div style="flex: 1; min-width: 250px;">
-    <p style="color:#666; font-size:1.1em; margin-top:0;"><strong>著者：</strong>和田秀樹</p>
-    <p style="font-size:0.9em; color:#888;">読了日：2026.8.28</p>
-  </div>
-</div>
+<p style="color:#666; font-size:1em; margin-bottom: 0.3em;"><strong>著者：</strong>和田秀樹</p>
+<p style="color:#888; font-size:0.9em; margin-bottom: 1.5em;">読了日：2026.8.28</p>
+
+<p><img src="/images/book1.jpg" alt="人は「感情」から老化する" style="max-width: 260px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);"></p>
 
 感情をいきいきさせるためにも、やはり行動したり、情報を探したり、人を頼ったりすることを忘れずにいたいと思う本でした。
 
