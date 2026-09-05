@@ -1,6 +1,7 @@
 ---
 title: "Home"
 draft: false
+type: "page"
 ---
 
 北澤茉奈（Mana KITAZAWA）のホームページです。
@@ -31,10 +32,10 @@ draft: false
 
 <small>
 
-**最新の Day Log（直近3件）**
+**最新の Day Log**
 
-* **2026-09-04**: [#390 いちごのしょうゆ](/day-log/390-strawberry-soy-sauce/)
-* **2026-09-03**: [#389 言葉のゆれ](/day-log/389-sample/)
-* **2026-09-02**: [#388 方言の魅力](/day-log/388-sample/)
+**2026-09-04**: [#390 いちごのしょうゆ](/day-log/390-strawberry-soy-sauce/)  
+**2026-09-03**: [#389 言葉のゆれ](/day-log/389-sample/)  
+**2026-09-02**: [#388 方言の魅力](/day-log/388-sample/)  
 
 </small>
