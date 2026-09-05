@@ -23,14 +23,7 @@ layout: "single"
 **Book Log**  
 旅先で出会ったり、その時々に気になった本を読みながら、心に残ったフレーズを記録しています。
 
-**Conference Log: Photos**  
-学会での思い出を残していきます。
-
 ---
-
-<small>
 
 **最新の Day Log**  
 2026-09-04：[#390 いちごのしょうゆ](/day-log/390-strawberry-soy-sauce/)
-
-</small>
