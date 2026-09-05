@@ -1,6 +1,7 @@
 ---
 title: "Home"
 draft: false
+type: "page"
 ---
 
 北澤茉奈（Mana KITAZAWA）のホームページです。
