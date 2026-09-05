@@ -34,6 +34,18 @@ draft = false
 
 
 
+<div style="margin: 2.5em 0 1.5em; text-align: center;">
+
+&#x20; <button onclick="let c=this.querySelector('.count'); c.innerText=parseInt(c.innerText)+1; this.style.transform='scale(1.1)'; setTimeout(()=>this.style.transform='scale(1)', 150);" style="background: #fff; border: 1px solid #ddd; border-radius: 20px; padding: 8px 18px; font-size: 0.9em; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05); transition: transform 0.15s ease;">
+
+&#x20;   👏 イイね！ <span class="count" style="margin-left: 4px; font-weight: bold; color: #666;">0</span>
+
+&#x20; </button>
+
+</div>
+
+
+
 \---
 
 
