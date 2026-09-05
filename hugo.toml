@@ -8,8 +8,6 @@ theme = 'PaperMod'
   defaultTheme = "light"
   disableThemeToggle = true
   paginate = 1
-
-  # 日付の表示形式を 「2026-9-4」スタイルに変更
   dateFormat = "2006-1-2"
 
 [[menu.main]]
@@ -51,7 +49,5 @@ theme = 'PaperMod'
   unsafe = true
 
 [taxonomies]
-  category = 'categories'
-  tag = 'tags'
-  keywords = 'keywords'
-
+  keyword = "keywords"
+  keywords = "keywords"
