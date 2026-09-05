@@ -1,11 +1,9 @@
 +++
 title = "人は「感情」から老化する"
 date = 2026-08-28
+author = "和田秀樹"
 draft = false
 +++
-
-<p style="color:#666; font-size:1em; margin-bottom: 0.3em;"><strong>著者：</strong>和田秀樹</p>
-<p style="color:#888; font-size:0.9em; margin-bottom: 1.5em;">読了日：2026.8.28</p>
 
 <p><img src="/images/book1.jpg" alt="人は「感情」から老化する" style="max-width: 260px; border-radius: 4px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);"></p>
 
