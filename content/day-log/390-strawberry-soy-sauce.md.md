@@ -6,14 +6,6 @@ date: 2026-09-04
 
 draft: false
 
-categories:
-
-&#x20; - day-log
-
-keywords:
-
-&#x20; - アブダクション推論
-
 \---
 
 
