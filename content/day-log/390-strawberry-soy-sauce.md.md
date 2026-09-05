@@ -38,15 +38,19 @@ draft = false
 
 
 
-\*\*参考\*\*
+<b>参考</b><br>
 
-（いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？
+（いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？<br>
 
-https://www.asahi.com/articles/DA3S16538020.html
+\[https://www.asahi.com/articles/DA3S16538020.html](https://www.asahi.com/articles/DA3S16538020.html)
 
 
 
-\*\*keywords\*\*
+<br>
+
+
+
+<b>keywords</b><br>
 
 \[\[アブダクション推論](/keywords/)]
 
