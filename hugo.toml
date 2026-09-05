@@ -3,6 +3,14 @@ languageCode = 'ja-jp'
 title = '北澤茉奈のホームページ'
 theme = 'PaperMod'
 
+[params]
+  env = "production"
+  defaultTheme = "light"
+  disableThemeToggle = true
+  ShowReadingTime = false
+  ShowShareButtons = false
+  ShowPostNavLinks = true
+
 [[menu.main]]
   name = 'Home'
   url = '/'
