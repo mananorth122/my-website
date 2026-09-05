@@ -42,5 +42,5 @@ draft: false
 
 （いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？
 
-\[https://www.asahi.com/articles/DA3S16538020.html](https://www.asahi.com/articles/DA3S16538020.html)
+(https://www.asahi.com/articles/DA3S16538020.html)
 
