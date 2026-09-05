@@ -8,21 +8,7 @@ draft: false
 
 
 
-<div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 2rem;">
-
-&#x20; <div style="flex: 1; min-width: 280px;">
-
-&#x20;   <img src="/images/profile.jpg" alt="Information Image" style="width: 100%; border-radius: 10px; border: 1px solid #e5e7eb; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-
-&#x20; </div>
-
-&#x20; <div style="flex: 2; min-width: 280px;">
-
-&#x20;   <p>研究活動、学会発表、論文、メディア出演などの最新情報です。</p>
-
-&#x20; </div>
-
-</div>
+研究活動、学会発表、論文、メディア出演などの最新情報です。
 
 
 
@@ -74,7 +60,7 @@ draft: false
 
 
 
-※ 詳細はこちら（\[researchmap](https://researchmap.jp/)）
+※ 詳細はこちら（\[researchmap](https://researchmap.jp/manakitazawa)）
 
 
 
@@ -102,21 +88,21 @@ draft: false
 
 \### Voicy 堀田隆一（英語史研究者）英語の語源が身につくラジオ (heldio)
 
-\* \[#327 【英語史の輪 #327】久しぶりに北澤茉奈さんとの対談 --- 博士論文研究について語ってもらいました](https://voicy.jp/)
+\* \[#327 【英語史の輪 #327】久しぶりに北澤茉奈さんとの対談 — 博士論文研究について語ってもらいました](https://voicy.jp/channel/1950/6978904)
 
-\* \[#1535 笑，草，gaers を考える --- 北澤茉奈さんとの対談](https://voicy.jp/)
+\* \[#1535 笑，草，gaers を考える — 北澤茉奈さんとの対談](https://voicy.jp/channel/1950/6974669)
 
 
 
 \### YouTube いのほた言語学チャンネル
 
-\* \[第366回 企業のディスコースの分析で博士号取得！お勤めの杉野服飾大学でファッションと記号・言語との関わりを展開！北澤茉奈さん](https://www.youtube.com/)
+\* \[第366回 企業のディスコースの分析で博士号取得！お勤めの杉野服飾大学でファッションと記号・言語との関わりを展開！北澤茉奈さん](https://youtu.be/9Od59IpV1pI?si=TDDHeZAWnyTTe42U)
 
-\* \[第368回 マルチ・オーディエンスデザインとは？企業の年次報告を談話分析と社会言語学の質的／量的に分析](https://www.youtube.com/)
+\* \[第368回 マルチ・オーディエンスデザインとは？企業の年次報告を談話分析と社会言語学の質的／量的に分析](https://youtu.be/\_0os1IL3pPM?si=-C1LO5l-PycNwnTg)
 
-\* \[第370回 企業のディスコースを質的／量的に分析ー質と量のグッドバランス！](https://www.youtube.com/)
+\* \[第370回 企業のディスコースを質的／量的に分析ー質と量のグッドバランス！](https://youtu.be/MdFfb8tpWVE?si=Ou2AJx4BmcAwv4qP)
 
-\* \[第372回 企業のコミュニケーションから個人のコミュニケーションまでー北澤茉奈さん（杉野服飾大学）](https://www.youtube.com/)
+\* \[第372回 企業のコミュニケーションから個人のコミュニケーションまでー北澤茉奈さん（杉野服飾大学）](https://youtu.be/qASlJtPgSso?si=9TXsOc8Ph0ptZiSw)
 
 
 
