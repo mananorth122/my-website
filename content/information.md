@@ -1,14 +1,14 @@
-\---
++++
 
-title: "Information"
+title = "Information"
 
-draft: false
+draft = false
 
-layout: "single"
+layout = "single"
 
-hidemeta: true
+hidemeta = true
 
-\---
++++
 
 
 
