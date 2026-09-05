@@ -1,8 +1,8 @@
 +++
 
-title: "Day Log"
+title = "Day Log"
 
-draft: false
+draft = false
 
 +++
 
