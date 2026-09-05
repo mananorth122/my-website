@@ -1,6 +1,7 @@
 ---
 title: "Home"
 draft: false
+layout: "simple"
 ---
 
 北澤茉奈（Mana KITAZAWA）のホームページです。
@@ -27,4 +28,9 @@ draft: false
 
 ---
 
-<small>**最新の Day Log**</small>
+<small>
+
+**最新の Day Log**  
+2026-09-04：[#390 いちごのしょうゆ](/day-log/390-strawberry-soy-sauce/)
+
+</small>
