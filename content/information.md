@@ -18,25 +18,25 @@ draft: false
 
 \* \*\*2026年3月\*\*  
 
-&#x20; 北澤茉奈, Instagramのハッシュタグにみる「#kawaii/#かわいい」の多行為性, 第50回社会言語科学会研究大会
+北澤茉奈, Instagramのハッシュタグにみる「#kawaii/#かわいい」の多行為性, 第50回社会言語科学会研究大会
 
 
 
 \* \*\*2025年11月\*\*  
 
-&#x20; 北澤茉奈・高村遼, 「草」の語用論的機能とメディアの影響-XとLINEにおける使用の比較-, 日本語用論学会第28回大会
+北澤茉奈・高村遼, 「草」の語用論的機能とメディアの影響-XとLINEにおける使用の比較-, 日本語用論学会第28回大会
 
 
 
 \* \*\*2025年6月\*\*  
 
-&#x20; Ryo Takamura \& Mana Kitazawa, 'Kusa' as an emerging laughter symbol in Japanese social media, The 19th International Pragmatics Conference
+Ryo Takamura \& Mana Kitazawa, 'Kusa' as an emerging laughter symbol in Japanese social media, The 19th International Pragmatics Conference
 
 
 
 \* \*\*2025年6月\*\*  
 
-&#x20; 北澤茉奈, パブリック・ディスコースのデファクトスタンダード化, 日本英文学会第97回大会 (シンポジウム：多様性の時代における「正しさ」の言語学-継承と形成から見る言語の規範と標準)
+北澤茉奈, パブリック・ディスコースのデファクトスタンダード化, 日本英文学会第97回大会 (シンポジウム：多様性の時代における「正しさ」の言語学-継承と形成から見る言語の規範と標準)
 
 
 
@@ -50,13 +50,13 @@ draft: false
 
 \* \*\*2025年3月\*\*  
 
-&#x20; 北澤茉奈, 英語教育におけるデジタルツールの利用と学習成果 -ChatGPT と YouTube の実践的応用-, 『杉野服飾大学紀要』第23巻 pp. 28-36
+北澤茉奈, 英語教育におけるデジタルツールの利用と学習成果 -ChatGPT と YouTube の実践的応用-, 『杉野服飾大学紀要』第23巻 pp. 28-36
 
 
 
 \* \*\*2025年2月\*\*  
 
-&#x20; Corporate Profiles as Public Narratives: Exploring Quantitative and Functional Inquiries to Critical Discourse Analysis（博士論文）
+Corporate Profiles as Public Narratives: Exploring Quantitative and Functional Inquiries to Critical Discourse Analysis（博士論文）
 
 
 
@@ -74,7 +74,7 @@ draft: false
 
 \* \*\*2026年3月\*\*  
 
-&#x20; 北澤茉奈（2026）「企業の語りから見る社会」宮嵜由美・八木橋宏勇（編）『響き合うことばと社会』開拓社, pp. 171-187.
+北澤茉奈（2026）「企業の語りから見る社会」宮嵜由美・八木橋宏勇（編）『響き合うことばと社会』開拓社, pp. 171-187.
 
 
 
