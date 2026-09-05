@@ -49,7 +49,3 @@ hasCJKLanguage = true
 
 [markup.goldmark.renderer]
   unsafe = true
-
-[taxonomies]
-  tag = "keywords" 
-  category = "categories"

@@ -1,0 +1,21 @@
+---
+title: "Keywords"
+draft: false
+---
+
+<h2>キーワード一覧</h2>
+
+<ul style="line-height: 1.8;">
+  <li>
+    <strong>アブダクション推論</strong>
+    <ul>
+      <li><a href="/day-log/390-strawberry-soy-sauce/">#390 いちごのしょうゆ</a></li>
+    </ul>
+  </li>
+  <li style="margin-top: 1em;">
+    <strong>社会言語学</strong>
+    <ul>
+      <li>準備中</li>
+    </ul>
+  </li>
+</ul>
