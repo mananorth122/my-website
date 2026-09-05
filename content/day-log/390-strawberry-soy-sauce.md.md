@@ -50,9 +50,3 @@ https://www.asahi.com/articles/DA3S16538020.html
 
 
 
-\### keywords
-
-
-
-\[\[アブダクション推論](/keywords/)]
-
