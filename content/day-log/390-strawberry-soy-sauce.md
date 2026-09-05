@@ -6,6 +6,10 @@ date = 2026-09-04
 
 draft = false
 
+layout = "single"
+
+hidemeta = true
+
 +++
 
 
@@ -44,7 +48,7 @@ draft = false
 
 \*\*参考\*\*  
 
-（いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？
+（いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？  
 
 https://www.asahi.com/articles/DA3S16538020.html
 
