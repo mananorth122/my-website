@@ -6,7 +6,7 @@ date = 2026-09-04
 
 draft = false
 
-keywords = \["アブダクション推論"]
+tags = \["アブダクション推論"]
 
 +++
 

@@ -34,7 +34,7 @@ hasCJKLanguage = true
 
 [[menu.main]]
   name = 'Keywords'
-  url = '/keywords/'
+  url = '/tags/'
   weight = 5
 
 [[menu.main]]
@@ -51,5 +51,5 @@ hasCJKLanguage = true
   unsafe = true
 
 [taxonomies]
-  keyword = "keywords"
-  keywords = "keywords"
+  tag = "tags"
+  category = "categories"
