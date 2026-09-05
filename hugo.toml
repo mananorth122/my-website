@@ -3,6 +3,8 @@ languageCode = 'ja-jp'
 title = '北澤茉奈のホームページ'
 theme = 'PaperMod'
 
+hasCJKLanguage = true
+
 [params]
   env = "production"
   defaultTheme = "light"
