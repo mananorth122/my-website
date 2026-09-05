@@ -4,12 +4,6 @@ title = "Book Log"
 
 draft = false
 
-
-
-\[cascade]
-
-&#x20; \_build = { render = "never", list = "never" }
-
 +++
 
 
