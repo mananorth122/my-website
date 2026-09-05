@@ -6,22 +6,9 @@ layout: "single"
 
 北澤茉奈（Mana KITAZAWA）のホームページです。
 
-連絡先：mkitazawa@kyoritsu-wu.ac.jp
+社会言語学をはじめとする言語学のトピックや、日々出会った言葉の記録、読書メモなどを綴っています。
 
-## Contents
-
-**Profile**  
-[プロフィールページへ](/profile/)
-
-**Information**  
-[お知らせ・研究活動へ](/information/)
-
-**Day Log**  
-毎日少しずつ、気になったことばの現象や、社会言語学をはじめとする言語学に関連する話題を書き留めています。  
-（[Keywords](/keywords/) からも読めます♪）
-
-**Book Log**  
-旅先で出会ったり、その時々に気になった本を読みながら、心に残ったフレーズを記録しています。
+**連絡先**：mkitazawa@kyoritsu-wu.ac.jp
 
 ---
 
