@@ -34,15 +34,17 @@ draft = false
 
 
 
-<!-- イイねボタン（100%確実に表示されるローカル保存版） -->
+<!-- イイねボタン（100%確実に押せるローカル保存版） -->
 
 <div style="margin: 3em 0 2em; text-align: center;">
 
-&#x20; <button id="like-btn-390" style="background: #ffffff; border: 1.5px solid #e0e0e0; border-radius: 30px; padding: 10px 24px; font-size: 1em; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
+&#x20; <!-- ▼ 修正：onclickを追加 ▼ -->
+
+&#x20; <button id="like-btn-390" onclick="clapDayLog390()" style="background: #ffffff; border: 1.5px solid #e0e0e0; border-radius: 30px; padding: 10px 24px; font-size: 1em; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
 
 &#x20;   <span style="font-size: 1.2em;">👏</span>
 
-&#x20;   <span style="font-weight: 600; color: #333;">イイネ！</span>
+&#x20;   <span style="font-weight: 600; color: #333;">イイね！</span>
 
 &#x20;   <span id="like-count-390" style="background: #f0f0f0; padding: 2px 10px; border-radius: 12px; font-weight: bold; font-size: 0.9em; color: #555;">0</span>
 
@@ -52,47 +54,59 @@ draft = false
 
 
 
+<!-- JavaScript（グローバル関数に修正） -->
+
 <script>
+
+&#x20; // グローバル変数としてページIDとカウント要素を定義
+
+&#x20; const pageId390 = 'day-log-390';
+
+&#x20; const countEl390 = document.getElementById('like-count-390');
+
+&#x20; let currentCount390 = 0;
+
+
+
+&#x20; // ページ読み込み時に保存されたカウントを読み込み
 
 &#x20; (function() {
 
-&#x20;   const pageId = 'day-log-390';
+&#x20;   currentCount390 = parseInt(localStorage.getItem('like\_' + pageId390) || '0', 10);
 
-&#x20;   const btn = document.getElementById('like-btn-390');
-
-&#x20;   const countEl = document.getElementById('like-count-390');
-
-
-
-&#x20;   // 保存されているカウントを読み込み
-
-&#x20;   let currentCount = parseInt(localStorage.getItem('like\_' + pageId) || '0', 10);
-
-&#x20;   countEl.innerText = currentCount;
-
-
-
-&#x20;   btn.addEventListener('click', function() {
-
-&#x20;     currentCount++;
-
-&#x20;     countEl.innerText = currentCount;
-
-&#x20;     localStorage.setItem('like\_' + pageId, currentCount);
-
-
-
-&#x20;     // ポンと跳ねるアニメーション
-
-&#x20;     btn.style.transform = 'scale(1.15)';
-
-&#x20;     setTimeout(() => { btn.style.transform = 'scale(1)'; }, 150);
-
-&#x20;   });
+&#x20;   countEl390.innerText = currentCount390;
 
 &#x20; })();
 
+
+
+&#x20; // ▼ ボタンをクリックした時の関数 ▼
+
+&#x20; window.clapDayLog390 = function() {
+
+&#x20;   // カウントを増やして保存
+
+&#x20;   currentCount390++;
+
+&#x20;   countEl390.innerText = currentCount390;
+
+&#x20;   localStorage.setItem('like\_' + pageId390, currentCount390);
+
+
+
+&#x20;   // ポンと跳ねるアニメーション
+
+&#x20;   const btn = document.getElementById('like-btn-390');
+
+&#x20;   btn.style.transform = 'scale(1.15)';
+
+&#x20;   setTimeout(() => { btn.style.transform = 'scale(1)'; }, 150);
+
+&#x20; };
+
 </script>
+
+
 
 \---
 
