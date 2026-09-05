@@ -6,10 +6,6 @@ date = 2026-09-04
 
 draft = false
 
-layout = "single"
-
-hidemeta = true
-
 +++
 
 
