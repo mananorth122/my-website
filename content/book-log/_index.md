@@ -1,3 +1,19 @@
++++
+
+title = "Book Log"
+
+draft = false
+
+
+
+\[cascade]
+
+&#x20; \_build = { render = "never", list = "never" }
+
++++
+
+
+
 旅先で出会ったり、その時々に気になった本を読みながら、心に残ったフレーズを記録しています。
 
 
