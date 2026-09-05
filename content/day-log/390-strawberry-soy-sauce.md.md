@@ -1,10 +1,10 @@
 +++
 
-title: "#390 いちごのしょうゆ"
+title = "#390 いちごのしょうゆ"
 
-date: 2026-09-04
+date = 2026-09-04
 
-draft: false
+draft = false
 
 +++
 
@@ -34,19 +34,19 @@ draft: false
 
 
 
-+++
+\---
 
 
 
-\*\*参考\*\*  
+\*\*参考\*\*
 
-（いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？  
+（いま聞く）今井むつみさん 認知心理学者 生成ＡＩ、学びにどういかせば？
 
-\[https://www.asahi.com/articles/DA3S16538020.html](https://www.asahi.com/articles/DA3S16538020.html)
+https://www.asahi.com/articles/DA3S16538020.html
 
 
 
-\*\*keywords\*\*  
+\*\*keywords\*\*
 
 \[\[アブダクション推論](/keywords/)]
 
