@@ -1,14 +1,27 @@
 {{ $id := .Get "id" | default .Page.File.TranslationBaseName }}
 
 <div style="margin: 1.5em 0;">
-  <button id="like-btn-{{ $id }}" onclick="addLike('{{ $id }}')" style="padding: 6px 16px; border: 1px solid #ccc; border-radius: 20px; background: #fff; cursor: pointer; font-size: 0.9em; display: inline-flex; align-items: center; gap: 6px;">
-    ❤️ いいね <span id="like-count-{{ $id }}">0</span>
+  <button id="like-btn-{{ $id }}" onclick="addLike('{{ $id }}')" style="padding: 6px 16px; border: 1px solid #ccc; border-radius: 20px; background: #fff; cursor: pointer; font-size: 0.9em; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;">
+    ❤️ <span id="like-text-{{ $id }}">いいね</span> <span id="like-count-{{ $id }}">0</span>
   </button>
 </div>
 
 <script>
 (function() {
   const id = "{{ $id }}";
+  const btn = document.getElementById(`like-btn-${id}`);
+  const text = document.getElementById(`like-text-${id}`);
+
+  // すでに「いいね」済みかローカルストレージをチェック
+  if (localStorage.getItem(`liked_${id}`)) {
+    btn.disabled = true;
+    btn.style.opacity = "0.6";
+    btn.style.cursor = "default";
+    btn.style.background = "#f0f0f0";
+    text.innerText = "いいね済み";
+  }
+
+  // カウントを取得して表示
   fetch(`/like?id=${id}`)
     .then(res => res.json())
     .then(data => {
@@ -20,13 +33,33 @@
 })();
 
 function addLike(id) {
+  // 押し直し防止チェック
+  if (localStorage.getItem(`liked_${id}`)) return;
+
+  const btn = document.getElementById(`like-btn-${id}`);
+  const text = document.getElementById(`like-text-${id}`);
+
+  // 連打防止のため押した瞬間に無効化
+  btn.disabled = true;
+
   fetch(`/like?id=${id}`, { method: 'POST' })
     .then(res => res.json())
     .then(data => {
       if (data.count !== undefined) {
         document.getElementById(`like-count-${id}`).innerText = data.count;
+        // ローカルストレージに「いいね済み」を記録
+        localStorage.setItem(`liked_${id}`, 'true');
+        btn.style.opacity = "0.6";
+        btn.style.cursor = "default";
+        btn.style.background = "#f0f0f0";
+        text.innerText = "いいね済み";
+      } else {
+        btn.disabled = false;
       }
     })
-    .catch(err => console.error(err));
+    .catch(err => {
+      console.error(err);
+      btn.disabled = false;
+    });
 }
 </script>
