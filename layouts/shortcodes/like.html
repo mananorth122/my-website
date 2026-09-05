@@ -9,24 +9,22 @@
 <script>
 (function() {
   const id = "{{ $id }}";
-  fetch(`https://api.lyket.dev/v1/like-buttons/manakitazawa-blog/${id}`)
+  fetch(`/like?id=${id}`)
     .then(res => res.json())
     .then(data => {
-      if (data.data && data.data.attributes) {
-        document.getElementById(`like-count-${id}`).innerText = data.data.attributes.total_likes;
+      if (data.count !== undefined) {
+        document.getElementById(`like-count-${id}`).innerText = data.count;
       }
     })
     .catch(err => console.error(err));
 })();
 
 function addLike(id) {
-  fetch(`https://api.lyket.dev/v1/like-buttons/manakitazawa-blog/${id}/press-like`, {
-    method: 'PUT'
-  })
+  fetch(`/like?id=${id}`, { method: 'POST' })
     .then(res => res.json())
     .then(data => {
-      if (data.data && data.data.attributes) {
-        document.getElementById(`like-count-${id}`).innerText = data.data.attributes.total_likes;
+      if (data.count !== undefined) {
+        document.getElementById(`like-count-${id}`).innerText = data.count;
       }
     })
     .catch(err => console.error(err));
