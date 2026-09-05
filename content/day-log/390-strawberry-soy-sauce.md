@@ -34,11 +34,19 @@ draft = false
 
 
 
-<div style="margin: 2.5em 0 1.5em; text-align: center;">
+<!-- いいねボタン -->
 
-&#x20; <script src="https://lychee.s3.ap-northeast-1.amazonaws.com/clap.js"></script>
+<div style="margin: 3em 0 2em; text-align: center;">
 
-&#x20; <button class="clap-button" data-id="day-log-390"></button>
+&#x20; <button id="clap-btn-390" onclick="clap390()" style="background: #fff; border: 1px solid #e0e0e0; border-radius: 24px; padding: 10px 22px; font-size: 0.95em; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
+
+&#x20;   <span style="font-size: 1.2em;">👏</span>
+
+&#x20;   <span style="font-weight: 500; color: #444;">イイね！</span>
+
+&#x20;   <span id="clap-count-390" style="background: #f0f0f0; padding: 2px 8px; border-radius: 12px; font-weight: bold; font-size: 0.85em; color: #666;">0</span>
+
+&#x20; </button>
 
 </div>
 
