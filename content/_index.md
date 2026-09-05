@@ -14,4 +14,5 @@ hidemeta: true
 ---
 
 **最新の Day Log**  
+2026-09-05：[#390 お客様は神様ではない](/day-log/391/)
 2026-09-04：[#390 いちごのしょうゆ](/day-log/390-strawberry-soy-sauce/)
