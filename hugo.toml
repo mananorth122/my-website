@@ -11,6 +11,7 @@ hasCJKLanguage = true
   disableThemeToggle = true
   paginate = 1
   dateFormat = "2006-1-2"
+  hideSummary = true
 
 [[menu.main]]
   name = 'Home'
