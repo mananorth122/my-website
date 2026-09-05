@@ -32,29 +32,69 @@ draft = false
 
 記事の後半では、生成AIをうまく活用した「アブダクション英語学習法」についても触れられていましたが、こちらは今井先生のご著書をじっくり読んでから、改めて学びを深めてみたいと思います。
 
-
-
-<!-- イイねボタン（Hugoの制限を完全に回避するワンライナー） -->
+<!-- イイねボタン（全角スペース除去・正常動作版） -->
 
 <div style="margin: 3em 0 2em; text-align: center;">
 
-&#x20; <button 
-
-&#x20;   onclick="let c=this.querySelector('.count'); let n=parseInt(c.innerText)+1; c.innerText=n; this.style.transform='scale(1.15)'; setTimeout(()=>this.style.transform='scale(1)', 150);" 
-
-&#x20;   style="background: #ffffff; border: 1.5px solid #e0e0e0; border-radius: 30px; padding: 10px 24px; font-size: 1em; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px;">
+&#x20; <button id="like-btn-390" type="button" style="background: #ffffff; border: 1.5px solid #e0e0e0; border-radius: 30px; padding: 10px 24px; font-size: 1em; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 8px; user-select: none;">
 
 &#x20;   <span style="font-size: 1.2em;">👏</span>
 
 &#x20;   <span style="font-weight: 600; color: #333;">イイね！</span>
 
-&#x20;   <span class="count" style="background: #f0f0f0; padding: 2px 10px; border-radius: 12px; font-weight: bold; font-size: 0.9em; color: #555;">0</span>
+&#x20;   <span id="like-count-390" style="background: #f0f0f0; padding: 2px 10px; border-radius: 12px; font-weight: bold; font-size: 0.9em; color: #555;">0</span>
 
 &#x20; </button>
 
 </div>
 
 
+
+<script>
+
+(function() {
+
+&#x20; var btn = document.getElementById('like-btn-390');
+
+&#x20; var countEl = document.getElementById('like-count-390');
+
+&#x20; var key = 'like\_day-log-390';
+
+
+
+&#x20; if (btn \&\& countEl) {
+
+&#x20;   var savedCount = parseInt(localStorage.getItem(key) || '0', 10);
+
+&#x20;   countEl.innerText = savedCount;
+
+
+
+&#x20;   btn.addEventListener('click', function() {
+
+&#x20;     savedCount++;
+
+&#x20;     countEl.innerText = savedCount;
+
+&#x20;     localStorage.setItem(key, savedCount);
+
+
+
+&#x20;     btn.style.transform = 'scale(1.15)';
+
+&#x20;     setTimeout(function() {
+
+&#x20;       btn.style.transform = 'scale(1)';
+
+&#x20;     }, 150);
+
+&#x20;   });
+
+&#x20; }
+
+})();
+
+</script>
 
 \---
 
