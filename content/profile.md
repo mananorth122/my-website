@@ -1,34 +1,24 @@
-<h2>所属</h2>
++++
 
-<ul>
+title = "Profile"
 
-&#x20; <li>共立女子大学 国際学部 専任講師</li>
+draft = false
 
-&#x20; <li>慶應義塾大学 理工学部 非常勤講師</li>
+layout = "single"
 
-&#x20; <li>法政大学 文学部 非常勤講師</li>
+hidemeta = true
 
-</ul>
-
-
-
-<hr>
++++
 
 
 
-<h2>学位</h2>
+<p><strong>所属</strong><br>
 
-<p>博士（文学）</p>
+共立女子大学 国際学部 専任講師<br>
 
+慶應義塾大学 理工学部 非常勤講師<br>
 
-
-<hr>
-
-
-
-<h2>専門</h2>
-
-<p>英語学 社会言語学 談話分析（公的談話、企業メッセージ）</p>
+法政大学 文学部 非常勤講師</p>
 
 
 
@@ -36,19 +26,35 @@
 
 
 
-<h2>所属学会</h2>
+<p><strong>学位</strong><br>
 
-<ul>
+博士（文学）</p>
 
-&#x20; <li>日本語用論学会</li>
 
-&#x20; <li>社会言語科学会</li>
 
-&#x20; <li>日本英文学会</li>
+<hr>
 
-&#x20; <li>International Pragmatics Association</li>
 
-</ul>
+
+<p><strong>専門</strong><br>
+
+英語学 社会言語学 談話分析（公的談話、企業メッセージ）</p>
+
+
+
+<hr>
+
+
+
+<p><strong>所属学会</strong><br>
+
+日本語用論学会<br>
+
+社会言語科学会<br>
+
+日本英文学会<br>
+
+International Pragmatics Association</p>
 
 
 
