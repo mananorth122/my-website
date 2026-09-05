@@ -46,3 +46,6 @@ theme = 'PaperMod'
   name = 'Conference Log: Photos'
   url = '/conference-log/'
   weight = 7
+
+[markup.goldmark.renderer]
+  unsafe = true
