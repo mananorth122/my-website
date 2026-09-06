@@ -2,39 +2,43 @@
    優しいピンク＆ナチュラルカラーのパレット
    ========================================== */
 
-/* --- 昼（ライトモード） --- */
+/* --- 昼（ライトモード）：明るくやわらかなサクラピンク --- */
 :root {
-    --theme: #fff9f9 !important;      /* 背景：ほんのりサクラ色 */
-    --entry: #4a3e3d !important;      /* 本文：やわらかいココアブラウン */
-    --primary: #4a3e3d !important;
-    --secondary: #8c7a78 !important;  /* 日付やサブテキスト */
-    --content: #ffffff !important;    /* カード背景 */
-    --border: #f3e1e1 !important;     /* 枠線 */
-    --tertiary: #fff0f0 !important;
-    --accent: #d9777f !important;     /* ローズピンク */
+    --theme: #fff5f6 !important;      /* 背景：明るく優しさいっぱいのサクラピンク */
+    --entry: #4a3a3b !important;      /* 本文：やわらかいココアブラウン */
+    --primary: #4a3a3b !important;
+    --secondary: #9e7a7c !important;  /* 日付やサブテキスト */
+    --content: #ffffff !important;    /* カード背景：クリーンな白 */
+    --border: #f7d6d8 !important;     /* 枠線：ほんのりピンク */
+    --tertiary: #ffeef0 !important;
+    --accent: #d96870 !important;     /* アクセント：鮮やかなローズピンク */
 }
 
-/* --- 夜（ダークモード） --- */
+/* --- 夜（ダークモード）：しっとり深みのあるスモーキーベリー --- */
 .dark {
-    --theme: #201a1b !important;
-    --entry: #f2e6e6 !important;
-    --primary: #f2e6e6 !important;
-    --secondary: #b39d9c !important;
-    --content: #2a2223 !important;
-    --border: #3d3032 !important;
-    --tertiary: #33282a !important;
-    --accent: #e8959c !important;
+    --theme: #161012 !important;      /* 背景：夜空のようにぐっと深いベリーブラック */
+    --entry: #fcebeb !important;      /* 本文：夜でも見やすい明るいサクラホワイト */
+    --primary: #fcebeb !important;
+    --secondary: #c29d9f !important;
+    --content: #221719 !important;    /* カード背景：暗めの落ち着いたボルドーブラック */
+    --border: #3d2629 !important;     /* 枠線：深みのあるくすみローズ */
+    --tertiary: #2e1e20 !important;
+    --accent: #f08d96 !important;     /* アクセント：夜に映えるやさしいライトローズ */
 }
 
 /* ==========================================
-   文字色の直接上書き（文字が白くなるのを防止）
+   文字色＆グラデーションの調整
    ========================================== */
 
 body, .post-content, .post-title, .post-description, .first-entry, .post-entry {
     color: var(--primary) !important;
 }
 
-/* 記事一覧の日付や「〇 min read」などのサブテキスト */
+/* ダークモード時のヘッダーや検索・切り替えアイコンの視認性確保 */
+.dark .nav, .dark .logo a, .dark #theme-toggle {
+    color: var(--primary) !important;
+}
+
 .post-meta, .entry-meta {
     color: var(--secondary) !important;
 }
@@ -69,7 +73,7 @@ body {
 
 .post-entry:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(217, 119, 127, 0.12);
+    box-shadow: 0 8px 20px rgba(217, 104, 112, 0.18);
 }
 
 /* 見出し (H2) */
@@ -81,9 +85,10 @@ body {
     font-weight: 600;
 }
 
-/* 蛍光ペン（<mark>タグ） */
+/* 蛍光ペン（<mark>タグ）昼夜で色合いを自動追従 */
 mark {
-    background: linear-gradient(transparent 60%, #ffd6da 60%) !important;
+    background: linear-gradient(transparent 60%, var(--border) 60%) !important;
+    color: inherit !important;
     padding: 0 4px;
     font-weight: 500;
 }
