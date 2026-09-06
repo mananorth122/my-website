@@ -42,5 +42,19 @@ hasCJKLanguage = true
   url = '/book-log/'
   weight = 6
 
+[[menu.main]]
+  name = 'Search'
+  url = '/search/'
+  weight = 7
+
 [markup.goldmark.renderer]
   unsafe = true
+
+[params]
+  # 昼夜モード切替ボタンをヘッダーに表示
+  defaultTheme = "auto" # "light" や "dark" にも設定可能
+  disableThemeToggle = false
+
+# 検索機能用の出力フォーマット（JSON）を許可
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
