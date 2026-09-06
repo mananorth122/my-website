@@ -5,6 +5,10 @@ theme = 'PaperMod'
 
 hasCJKLanguage = true
 
+# 分類（タクソノミー）の設定を修正
+[taxonomies]
+  keywordtest = "keywordtests"
+
 [params]
   env = "production"
   defaultTheme = "auto"
