@@ -9,7 +9,7 @@
     --primary: #4a3a3b !important;
     --secondary: #9e7a7c !important;  /* 日付やサブテキスト */
     --content: #ffffff !important;    /* カード背景：白 */
-    --border: #e8aab0 !important;     /* 枠線・区切り線：少し濃いめのやさしいローズピンク */
+    --border: #e8aab0 !important;     /* 枠線・区切り線：くすみローズ */
     --tertiary: #ffeef0 !important;
     --accent: #d96870 !important;     /* アクセント：ローズピンク */
 }
@@ -23,7 +23,7 @@ body.dark {
     --primary: #fcebeb !important;
     --secondary: #c29d9f !important;
     --content: #221719 !important;    /* カード背景 */
-    --border: #6e4247 !important;     /* 枠线・区切り線：しっかり主張するくすみローズ */
+    --border: #6e4247 !important;     /* 枠線・区切り線 */
     --tertiary: #2e1e20 !important;
     --accent: #f08d96 !important;     /* アクセント：ライトローズ */
 }
@@ -36,7 +36,6 @@ body, .post-content, .post-title, .post-description, .first-entry, .post-entry, 
     color: var(--primary) !important;
 }
 
-/* 日付・メタ情報 */
 .post-meta, .entry-meta {
     color: var(--secondary) !important;
 }
@@ -52,7 +51,74 @@ a:hover {
 }
 
 /* ==========================================
-   デザイン調整（カード・見出し・マーカー・区切り線）
+   【修正】いいねボタンの視認性向上
+   ========================================== */
+
+/* いいねボタン本体（背景と文字色をしっかり独立） */
+#like-button, .like-button, button.like-btn {
+    background-color: var(--content) !important;
+    color: #4a3a3b !important; /* 常にハッキリ見えるココアブラウン */
+    border: 1.5px solid var(--border) !important;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+/* いいねボタン内のカウント数字やテキスト */
+#like-button *, .like-button *, button.like-btn * {
+    color: #4a3a3b !important;
+}
+
+/* 押した状態（アクティブ） */
+#like-button.liked, .like-button.liked {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+    border-color: var(--accent) !important;
+}
+
+#like-button.liked *, .like-button.liked * {
+    color: #ffffff !important;
+}
+
+/* ==========================================
+   【修正】検索結果（Search）候補ボックスの視認性向上
+   ========================================== */
+
+/* 検索入力欄 */
+#searchInput {
+    background-color: var(--content) !important;
+    color: var(--primary) !important;
+    border: 1.5px solid var(--border) !important;
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+/* 検索結果のリストカード */
+#searchResults .post-entry, 
+ul#searchResults li,
+.search-result {
+    background-color: var(--content) !important;
+    border: 1.5px solid var(--border) !important;
+    margin-bottom: 12px;
+}
+
+/* 検索結果内のタイトル・一致テキスト */
+#searchResults .post-title,
+#searchResults .post-content,
+#searchResults a {
+    color: var(--primary) !important;
+}
+
+/* 検索ハイライト文字 */
+#searchResults mark {
+    background: #ffd6da !important;
+    color: #4a3a3b !important;
+}
+
+/* ==========================================
+   デザイン調整（カード・見出し・マーカー）
    ========================================== */
 
 body {
@@ -64,7 +130,7 @@ body {
 /* 記事カード */
 .post-entry {
     background: var(--content) !important;
-    border: 1.5px solid var(--border) !important; /* 枠線を少し太く・ハッキリ */
+    border: 1.5px solid var(--border) !important;
     border-radius: 16px;
     padding: 20px 24px;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -75,7 +141,7 @@ body {
     box-shadow: 0 8px 20px rgba(217, 104, 112, 0.22);
 }
 
-/* 見出し (H2) の左ライン */
+/* 見出し (H2) */
 .post-content h2 {
     border-left: 5px solid var(--accent) !important;
     padding-left: 12px;
