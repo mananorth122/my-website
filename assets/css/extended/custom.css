@@ -1,56 +1,80 @@
-/* --- 昼（ライトモード）の色設定 --- */
+/* ==========================================
+   優しいピンク＆ナチュラルカラーのパレット
+   ========================================== */
+
+/* --- 昼（ライトモード）：サクラ＆サボン調 --- */
 :root {
-    --theme: #fdfbf7;      /* 背景：温かみのあるオフホワイト */
-    --entry: #2c3e50;      /* 本文：見やすいダークグレー */
-    --primary: #2c3e50;
-    --secondary: #6c757d;
-    --content: #ffffff;    /* カード背景：白 */
-    --border: #e9ecef;     /* 枠線色 */
-    --accent: #8b3a3a;     /* アクセント（深みのあるボルドー） */
+    --theme: #fff9f9;      /* 背景：ほんのり桜色がかった暖かみのある白 */
+    --entry: #4a3e3d;      /* 本文：黒ではなく柔らかいココアブラウン */
+    --primary: #4a3e3d;
+    --secondary: #8c7a78;  /* サブテキスト：くすみブラウン */
+    
+    --content: #ffffff;    /* カード背景：ピュアホワイト */
+    --border: #f3e1e1;     /* 枠線：やさしい淡いピンク */
+    
+    --tertiary: #fff0f0;   /* ホバー時などの背景 */
+    --accent: #d9777f;     /* アクセント：落ち着いたローズピンク */
 }
 
-/* --- 夜（ダークモード）の色設定 --- */
+/* --- 夜（ダークモード）：スモーキーローズ調 --- */
 .dark {
-    --theme: #1a1d24;      /* 背景：シックなダークネイビー */
-    --entry: #e2e8f0;
-    --primary: #e2e8f0;
-    --secondary: #94a3b8;
-    --content: #242832;
-    --border: #334155;
-    --accent: #e28743;
+    --theme: #201a1b;      /* 背景：深みのあるスモーキーダークローズ */
+    --entry: #f2e6e6;      /* 本文：やわらかいピンクホワイト */
+    --primary: #f2e6e6;
+    --secondary: #b39d9c;
+    
+    --content: #2a2223;    /* カード背景 */
+    --border: #3d3032;     /* 枠線 */
+    --tertiary: #33282a;
+    --accent: #e8959c;     /* アクセント：やさしいペールローズ */
 }
 
-/* --- フォントと行間 --- */
+/* ==========================================
+   デザイン調整（フォント・カード・見出し）
+   ========================================== */
+
+/* フォントと行間（丸みのある読みやすいフォント構成） */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
     line-height: 1.8;
 }
 
-/* --- 記事カード（ホバー時に軽く浮き上がる効果） --- */
+/* リンクテキスト */
+a {
+    color: var(--primary);
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--accent);
+}
+
+/* 記事カード（角を丸くして柔らかい影をプラス） */
 .post-entry {
     background: var(--content);
     border: 1px solid var(--border);
-    border-radius: 12px;
+    border-radius: 16px;
     padding: 20px 24px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .post-entry:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 20px rgba(217, 119, 127, 0.08); /* ほのかなピンクの影 */
 }
 
-/* --- 見出し（H2の左側にアクセントライン） --- */
+/* 見出し（H2の左側にローズピンクのアクセントライン） */
 .post-content h2 {
     border-left: 4px solid var(--accent);
     padding-left: 12px;
     margin-top: 1.8em;
     margin-bottom: 0.8em;
+    font-weight: 600;
 }
 
-/* --- 蛍光ペン（<mark>タグのグラデーション化） --- */
+/* 蛍光ペン（淡いピンクのマーカー風） */
 mark {
-    background: linear-gradient(transparent 60%, #ffe066 60%);
+    background: linear-gradient(transparent 60%, #ffd6da 60%);
     padding: 0 4px;
     font-weight: 500;
 }
