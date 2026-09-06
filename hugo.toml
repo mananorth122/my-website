@@ -5,11 +5,11 @@ theme = 'PaperMod'
 
 hasCJKLanguage = true
 
-# タクソノミー（分類）の設定（デフォルトのtags/categoriesも併記して確実に有効化）
+# タクソノミー（キーワード自動集計）の設定を明示
 [taxonomies]
   category = "categories"
   tag = "tags"
-  keywordtest = "keywordtests"
+  keyword = "keywords"
 
 [params]
   env = "production"
