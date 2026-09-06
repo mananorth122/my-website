@@ -1,0 +1,56 @@
+/* --- 昼（ライトモード）の色設定 --- */
+:root {
+    --theme: #fdfbf7;      /* 背景：温かみのあるオフホワイト */
+    --entry: #2c3e50;      /* 本文：見やすいダークグレー */
+    --primary: #2c3e50;
+    --secondary: #6c757d;
+    --content: #ffffff;    /* カード背景：白 */
+    --border: #e9ecef;     /* 枠線色 */
+    --accent: #8b3a3a;     /* アクセント（深みのあるボルドー） */
+}
+
+/* --- 夜（ダークモード）の色設定 --- */
+.dark {
+    --theme: #1a1d24;      /* 背景：シックなダークネイビー */
+    --entry: #e2e8f0;
+    --primary: #e2e8f0;
+    --secondary: #94a3b8;
+    --content: #242832;
+    --border: #334155;
+    --accent: #e28743;
+}
+
+/* --- フォントと行間 --- */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Meiryo", sans-serif;
+    line-height: 1.8;
+}
+
+/* --- 記事カード（ホバー時に軽く浮き上がる効果） --- */
+.post-entry {
+    background: var(--content);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.post-entry:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* --- 見出し（H2の左側にアクセントライン） --- */
+.post-content h2 {
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    margin-top: 1.8em;
+    margin-bottom: 0.8em;
+}
+
+/* --- 蛍光ペン（<mark>タグのグラデーション化） --- */
+mark {
+    background: linear-gradient(transparent 60%, #ffe066 60%);
+    padding: 0 4px;
+    font-weight: 500;
+}
