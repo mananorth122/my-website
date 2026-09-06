@@ -1,7 +1,7 @@
 {{ $id := .Get "id" | default .Page.File.TranslationBaseName }}
 
 <div style="margin: 1.5em 0;">
-  <button id="like-btn-{{ $id }}" onclick="addLike('{{ $id }}')" style="padding: 6px 16px; border: 1px solid #ccc; border-radius: 20px; background: #fff; cursor: pointer; font-size: 0.9em; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;">
+  <button id="like-btn-{{ $id }}" onclick="toggleLike('{{ $id }}')" style="padding: 6px 16px; border: 1px solid #ccc; border-radius: 20px; background: #fff; cursor: pointer; font-size: 0.9em; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s;">
     ❤️ <span id="like-text-{{ $id }}">いいね</span> <span id="like-count-{{ $id }}">0</span>
   </button>
 </div>
@@ -9,16 +9,10 @@
 <script>
 (function() {
   const id = "{{ $id }}";
-  const btn = document.getElementById(`like-btn-${id}`);
-  const text = document.getElementById(`like-text-${id}`);
-
-  // すでに「いいね」済みかローカルストレージをチェック
+  
+  // 初期状態の見た目を設定
   if (localStorage.getItem(`liked_${id}`)) {
-    btn.disabled = true;
-    btn.style.opacity = "0.6";
-    btn.style.cursor = "default";
-    btn.style.background = "#f0f0f0";
-    text.innerText = "いいね済み";
+    setLikedUI(id, true);
   }
 
   // カウントを取得して表示
@@ -32,33 +26,48 @@
     .catch(err => console.error(err));
 })();
 
-function addLike(id) {
-  // 押し直し防止チェック
-  if (localStorage.getItem(`liked_${id}`)) return;
-
+function setLikedUI(id, isLiked) {
   const btn = document.getElementById(`like-btn-${id}`);
   const text = document.getElementById(`like-text-${id}`);
+  
+  if (isLiked) {
+    btn.style.background = "#ffe6e6";
+    btn.style.borderColor = "#ff4d4d";
+    text.innerText = "いいね済み";
+  } else {
+    btn.style.background = "#fff";
+    btn.style.borderColor = "#ccc";
+    text.innerText = "いいね";
+  }
+}
 
-  // 連打防止のため押した瞬間に無効化
+function toggleLike(id) {
+  const btn = document.getElementById(`like-btn-${id}`);
+  const isLiked = !!localStorage.getItem(`liked_${id}`);
+  const action = isLiked ? "decrement" : "increment";
+
+  // 連打防止のため一時的にボタンを無効化
   btn.disabled = true;
 
-  fetch(`/like?id=${id}`, { method: 'POST' })
+  fetch(`/like?id=${id}&action=${action}`, { method: 'POST' })
     .then(res => res.json())
     .then(data => {
       if (data.count !== undefined) {
         document.getElementById(`like-count-${id}`).innerText = data.count;
-        // ローカルストレージに「いいね済み」を記録
-        localStorage.setItem(`liked_${id}`, 'true');
-        btn.style.opacity = "0.6";
-        btn.style.cursor = "default";
-        btn.style.background = "#f0f0f0";
-        text.innerText = "いいね済み";
-      } else {
-        btn.disabled = false;
+        
+        if (isLiked) {
+          // いいね解除処理
+          localStorage.removeItem(`liked_${id}`);
+          setLikedUI(id, false);
+        } else {
+          // いいね追加処理
+          localStorage.setItem(`liked_${id}`, 'true');
+          setLikedUI(id, true);
+        }
       }
     })
-    .catch(err => {
-      console.error(err);
+    .catch(err => console.error(err))
+    .finally(() => {
       btn.disabled = false;
     });
 }
