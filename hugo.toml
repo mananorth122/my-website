@@ -7,11 +7,11 @@ hasCJKLanguage = true
 
 [params]
   env = "production"
-  defaultTheme = "light"
-  disableThemeToggle = true
+  defaultTheme = "auto"
+  disableThemeToggle = false
   paginate = 1
   dateFormat = "2006-1-2"
-  
+
 [[menu.main]]
   name = 'Home'
   url = '/'
@@ -47,14 +47,10 @@ hasCJKLanguage = true
   url = '/search/'
   weight = 7
 
-[markup.goldmark.renderer]
-  unsafe = true
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
 
-[params]
-  # 昼夜モード切替ボタンをヘッダーに表示
-  defaultTheme = "auto" # "light" や "dark" にも設定可能
-  disableThemeToggle = false
-
-# 検索機能用の出力フォーマット（JSON）を許可
 [outputs]
   home = ["HTML", "RSS", "JSON"]
