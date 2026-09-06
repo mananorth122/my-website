@@ -5,8 +5,10 @@ theme = 'PaperMod'
 
 hasCJKLanguage = true
 
-# 分類（タクソノミー）の設定を修正
+# タクソノミー（分類）の設定（デフォルトのtags/categoriesも併記して確実に有効化）
 [taxonomies]
+  category = "categories"
+  tag = "tags"
   keywordtest = "keywordtests"
 
 [params]
@@ -58,3 +60,7 @@ hasCJKLanguage = true
 
 [outputs]
   home = ["HTML", "RSS", "JSON"]
+  page = ["HTML"]
+  section = ["HTML", "RSS"]
+  taxonomy = ["HTML", "RSS"]
+  term = ["HTML", "RSS"]
