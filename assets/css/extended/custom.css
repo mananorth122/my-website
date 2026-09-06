@@ -2,7 +2,7 @@
    優しいピンク＆ナチュラルカラーのパレット
    ========================================== */
 
-/* --- 昼（ライトモード）：明るくやわらかなサクラピンク --- */
+/* --- 昼（ライトモード）：デフォルト --- */
 :root {
     --theme: #fff5f6 !important;      /* 背景：明るく優しさいっぱいのサクラピンク */
     --entry: #4a3a3b !important;      /* 本文：やわらかいココアブラウン */
@@ -14,8 +14,10 @@
     --accent: #d96870 !important;     /* アクセント：鮮やかなローズピンク */
 }
 
-/* --- 夜（ダークモード）：しっとり深みのあるスモーキーベリー --- */
-.dark {
+/* --- 夜（ダークモード）：全ページで確実に適用 --- */
+.dark,
+[data-theme="dark"],
+body.dark {
     --theme: #161012 !important;      /* 背景：夜空のようにぐっと深いベリーブラック */
     --entry: #fcebeb !important;      /* 本文：夜でも見やすい明るいサクラホワイト */
     --primary: #fcebeb !important;
@@ -27,18 +29,14 @@
 }
 
 /* ==========================================
-   文字色＆グラデーションの調整
+   文字色・全ページの表示固定
    ========================================== */
 
-body, .post-content, .post-title, .post-description, .first-entry, .post-entry {
+body, .post-content, .post-title, .post-description, .first-entry, .post-entry, .page-header, .share-buttons {
     color: var(--primary) !important;
 }
 
-/* ダークモード時のヘッダーや検索・切り替えアイコンの視認性確保 */
-.dark .nav, .dark .logo a, .dark #theme-toggle {
-    color: var(--primary) !important;
-}
-
+/* 日付・メタ情報 */
 .post-meta, .entry-meta {
     color: var(--secondary) !important;
 }
@@ -58,6 +56,7 @@ a:hover {
    ========================================== */
 
 body {
+    background-color: var(--theme) !important;
     font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Meiryo", sans-serif;
     line-height: 1.8;
 }
@@ -85,7 +84,7 @@ body {
     font-weight: 600;
 }
 
-/* 蛍光ペン（<mark>タグ）昼夜で色合いを自動追従 */
+/* 蛍光ペン（<mark>タグ） */
 mark {
     background: linear-gradient(transparent 60%, var(--border) 60%) !important;
     color: inherit !important;
