@@ -3,6 +3,7 @@ title = "人は「感情」から老化する"
 date = "2026-08-28"
 author = "和田秀樹"
 draft = false
+keywords = ["読書記録", "感情の老化"]
 +++
 
 <p><img src="/images/book1.jpg" alt="人は「感情」から老化する" style="max-width: 260px; border-radius: 8px; border: 1.5px solid var(--border);"></p>
