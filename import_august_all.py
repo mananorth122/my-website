@@ -4,8 +4,15 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-OUTPUT_DIR = os.path.join("content", "day-log")
+# 【変更点1】出力先を 2026-8 フォルダに変更
+OUTPUT_DIR = os.path.join("content", "day-log", "2026-8")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+# 【追加】2026年8月用のインデックスファイル（_index.md）を自動作成
+index_path = os.path.join(OUTPUT_DIR, "_index.md")
+if not os.path.exists(index_path):
+    with open(index_path, "w", encoding="utf-8") as f:
+        f.write('+++\ntitle = "2026年8月"\ndate = 2026-08-01\ndraft = false\n+++\n')
 
 AUGUST_URL = "https://sites.google.com/view/mana-kitazawa/day-log/2026-8"
 
@@ -78,14 +85,11 @@ def parse_daylog_article(url):
             continue
             
         if capture:
-            # 「keywords」が来たら本文・参考の取得を完全終了
             if re.match(r"^keywords", block, re.IGNORECASE):
                 break
 
-            # 「参考」または「References」という単語が含まれている場合
             if re.search(r"^(参考|References)", block) or (not in_reference and "参考" in block and len(block) < 10):
                 in_reference = True
-                # 「参考」ヘッダーを取り除いた残りの文字があれば追加
                 cleaned_ref = re.sub(r"^(参考|References)\s*", "", block).strip()
                 if cleaned_ref:
                     reference_lines.append(cleaned_ref)
@@ -98,7 +102,6 @@ def parse_daylog_article(url):
 
     body_content = "\n\n".join(main_body)
 
-    # いいねボタンとフッターの組み立て
     formatted_footer = f"\n\n{{{{< like id=\"day-log-{entry_num}\" >}}}}\n\n---"
 
     if reference_lines:
@@ -110,10 +113,13 @@ def parse_daylog_article(url):
         formatted_footer += f"\n\n**Keywords**  \n{kw_display}"
 
     kw_formatted = ", ".join([f'"{k}"' for k in keywords])
+    
+    # 【変更点2】URL指定を固定化してフォルダが変わってもリンクが崩れないように設定
     md_content = f"""+++
 title = "{full_title}"
 date = {date_str}
 draft = false
+url = "/day-log/{entry_num}/"
 keywords = [{kw_formatted}]
 +++
 
@@ -137,4 +143,4 @@ if __name__ == "__main__":
             success += 1
         time.sleep(1)
 
-    print(f"\n🎉 再生成完了! 合計 {success} 件の処理が終わりました。")
+    print(f"\n🎉 整理完了! 合計 {success} 件の処理が終わりました。")
