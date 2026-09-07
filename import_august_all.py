@@ -76,14 +76,19 @@ def parse_daylog_article(url):
         if full_title in block or f"#{entry_num}" in block:
             capture = True
             continue
-        if "keywords" in block.lower():
-            break
+            
         if capture:
-            if block.startswith("参考") or block.startswith("References"):
+            # 「keywords」が来たら本文・参考の取得を完全終了
+            if re.match(r"^keywords", block, re.IGNORECASE):
+                break
+
+            # 「参考」または「References」という単語が含まれている場合
+            if re.search(r"^(参考|References)", block) or (not in_reference and "参考" in block and len(block) < 10):
                 in_reference = True
-                ref_text = re.sub(r"^(参考|References)\s*", "", block).strip()
-                if ref_text:
-                    reference_lines.append(ref_text)
+                # 「参考」ヘッダーを取り除いた残りの文字があれば追加
+                cleaned_ref = re.sub(r"^(参考|References)\s*", "", block).strip()
+                if cleaned_ref:
+                    reference_lines.append(cleaned_ref)
                 continue
 
             if in_reference:
@@ -93,6 +98,7 @@ def parse_daylog_article(url):
 
     body_content = "\n\n".join(main_body)
 
+    # いいねボタンとフッターの組み立て
     formatted_footer = f"\n\n{{{{< like id=\"day-log-{entry_num}\" >}}}}\n\n---"
 
     if reference_lines:
@@ -118,7 +124,7 @@ keywords = [{kw_formatted}]
     with open(filepath, "w", encoding="utf-8") as f:
         f.write(md_content)
 
-    print(f"✅ 生成完了: Day Log #{entry_num} -> {filepath}")
+    print(f"✅ 生成完了: Day Log #{entry_num} (参考: {'あり' if reference_lines else 'なし'})")
     return True
 
 if __name__ == "__main__":
@@ -129,8 +135,6 @@ if __name__ == "__main__":
     for link in links:
         if parse_daylog_article(link):
             success += 1
-        time.sleep(1) # Googleサーバー負荷軽減のための1秒待機
+        time.sleep(1)
 
-    print(f"\n==========================================")
-    print(f"🎉 処理完了! 8月分 合計 {success} 件の移行が完了しました。")
-    print(f"==========================================")
+    print(f"\n🎉 再生成完了! 合計 {success} 件の処理が終わりました。")
