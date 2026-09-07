@@ -177,3 +177,43 @@ mark {
     margin: 1.5em 0;
     border-radius: 0 8px 8px 0;
 }
+
+/* ==========================================
+   ページナビゲーション（Next / Prev ボタン）の視認性固定
+   ========================================== */
+
+/* ページネーション枠組み全体 */
+.pagination, .page-link, .pagination a, .pagination span {
+    color: var(--primary) !important;
+}
+
+/* Prev / Next ボタンのカード化スタイル */
+.pagination a, .prev, .next {
+    background-color: var(--content) !important;
+    color: var(--primary) !important;
+    border: 1.5px solid var(--border) !important;
+    border-radius: 12px;
+    padding: 8px 16px;
+    text-decoration: none !important;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+/* ホバー時の挙動（背景をアクセント色にして文字を白に） */
+.pagination a:hover, .prev:hover, .next:hover {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+    border-color: var(--accent) !important;
+}
+
+/* ダークモード時の文字色ズレ防止 */
+.dark .pagination a, .dark .prev, .dark .next {
+    background-color: var(--content) !important;
+    color: var(--primary) !important;
+    border-color: var(--border) !important;
+}
+
+.dark .pagination a:hover, .dark .prev:hover, .dark .next:hover {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+}
