@@ -217,3 +217,43 @@ mark {
     background-color: var(--accent) !important;
     color: #ffffff !important;
 }
+
+/* ==========================================
+   月別インデックス（サブカテゴリー）のコンパクト表示
+   ========================================== */
+
+/* 記事一覧内のフォルダ/サブカテゴリーカード（月別インデックス）を小さく横並び化 */
+.post-entry.sub-section,
+a[href*="/day-log/2026-"] .post-entry,
+.terms-tags a,
+.list-page .post-entry:has(a[href*="/day-log/2026-"]) {
+    display: inline-block !important;
+    width: auto !important;
+    padding: 6px 16px !important;
+    margin: 4px 8px 12px 0 !important;
+    border-radius: 20px !important;
+    background-color: var(--tertiary) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+    font-size: 0.9em !important;
+    font-weight: 600 !important;
+}
+
+/* ホバー時のデザイン（控えめなローズピンクに変化） */
+.post-entry.sub-section:hover,
+a[href*="/day-log/2026-"] .post-entry:hover {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+    border-color: var(--accent) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* 内部タイトルの余白と大きさをリセット */
+.post-entry.sub-section .entry-header h2,
+.post-entry.sub-section .post-title {
+    font-size: 0.95rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important; /* H2左の装飾線を消去 */
+    display: inline !important;
+}
