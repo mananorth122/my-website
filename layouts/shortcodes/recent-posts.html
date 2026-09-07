@@ -1,0 +1,6 @@
+{{ range first 3 (where .Site.RegularPages "Section" "day-log") }}
+  <div style="margin-bottom: 0.5em;">
+    <span style="opacity: 0.8; font-size: 0.9em; margin-right: 0.5em;">{{ .Date.Format "2006-01-02" }}：</span>
+    <a href="{{ .RelPermalink }}" style="font-weight: 500;">{{ .Title }}</a>
+  </div>
+{{ end }}
