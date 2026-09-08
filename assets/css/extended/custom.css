@@ -218,3 +218,47 @@ mark {
     color: #ffffff !important;
 }
 
+/* ==========================================
+   月別インデックス（2026年8月/9月等）のデザイン調整
+   ========================================== */
+
+/* 1. 月別インデックスカード内の「日付（meta情報）」を完全に非表示 */
+.post-entry:has(a[href*="/day-log/2026-"]) .entry-footer,
+a[href*="/day-log/2026-"] .entry-footer {
+    display: none !important;
+}
+
+/* 2. 大きな枠線をコンパクトな丸枠（ピルタグ）に変更 */
+a[href*="/day-log/2026-"] .post-entry,
+.post-entry:has(a[href*="/day-log/2026-"]) {
+    display: inline-block !important;
+    width: auto !important;
+    min-height: auto !important;
+    padding: 8px 20px !important;
+    margin: 6px 10px 16px 0 !important;
+    border-radius: 20px !important;
+    background-color: var(--tertiary) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: none !important;
+}
+
+/* ホバー時の装飾 */
+a[href*="/day-log/2026-"]:hover .post-entry,
+.post-entry:has(a[href*="/day-log/2026-"]):hover {
+    background-color: var(--accent) !important;
+    border-color: var(--accent) !important;
+    transform: translateY(-1px) !important;
+}
+
+a[href*="/day-log/2026-"]:hover .entry-header h2 {
+    color: #ffffff !important;
+}
+
+/* タイトル文字の調整 */
+.post-entry:has(a[href*="/day-log/2026-"]) .entry-header h2,
+a[href*="/day-log/2026-"] .entry-header h2 {
+    font-size: 1rem !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+}
