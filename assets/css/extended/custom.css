@@ -269,7 +269,7 @@ a[href*="/day-log/2026-"] .entry-header h2 {
 
 /* ヘッダー（ナビゲーションエリア） */
 .nav {
-    background-image: url('/images/header-bg.jpg') !important;
+    background-image: url('/images/bg.jpg') !important;
     background-size: cover !important;        /* エリア全体を覆うように拡大縮小 */
     background-position: center !important;   /* 中央に配置 */
     background-repeat: no-repeat !important;
@@ -278,7 +278,7 @@ a[href*="/day-log/2026-"] .entry-header h2 {
 
 /* フッター（ページ最下部） */
 .footer {
-    background-image: url('/images/header-bg.jpg') !important;
+    background-image: url('/images/bg.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
