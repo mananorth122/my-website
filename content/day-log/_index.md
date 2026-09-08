@@ -12,11 +12,11 @@ draft = false
 
 
 
-\---
+<hr>
 
 
 
-\*\*最新の Day Log\*\*
+<p><strong>最新の Day Log</strong></p>
 
 
 
@@ -24,5 +24,9 @@ draft = false
 
 
 
-\---
+<hr>
+
+
+
+<p><strong>過去の記事（月ごと）</strong></p>
 
