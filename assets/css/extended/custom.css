@@ -282,17 +282,20 @@ a[href*="/day-log/2026-"] .entry-header h2 {
     background-color: transparent !important;
 }
 
-/* 3. フッター（ページ最下部） */
+/* 3. フッター（ヘッダーと幅・表示範囲を完全に一致させる） */
 .footer {
     background-image: url('/images/bg.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     border-top: 1px solid var(--border) !important;
-    padding: 30px 20px !important;
-}
-
-/* 4. 文字の可読性補正（白い影を付与） */
-.nav a, .footer, .footer a {
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8) !important;
+    
+    /* 横幅をヘッダー同様に100%に広げる */
+    width: 100% !important;
+    max-width: 100% !important;
+    
+    /* ヘッダーに近い余白感に統一 */
+    padding: 16px 24px !important;
+    margin-top: 40px !important;
+    box-sizing: border-box !important;
 }
