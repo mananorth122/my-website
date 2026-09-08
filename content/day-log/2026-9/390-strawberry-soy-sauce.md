@@ -2,6 +2,7 @@
 title = "#390 いちごのしょうゆ"
 date = 2026-09-04
 draft = false
+url = "/day-log/390/"
 keywords = ["アブダクション推論"]
 +++
 
