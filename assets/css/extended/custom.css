@@ -267,26 +267,32 @@ a[href*="/day-log/2026-"] .entry-header h2 {
    ヘッダーとフッターの背景画像設定
    ========================================== */
 
-/* ヘッダー（ナビゲーションエリア） */
-.nav {
+/* 1. ヘッダー全体（親要素）に背景画像を設定 */
+.header {
     background-image: url('/images/bg.jpg') !important;
-    background-size: cover !important;        /* エリア全体を覆うように拡大縮小 */
-    background-position: center !important;   /* 中央に配置 */
+    background-size: cover !important;
+    background-position: center !important;
     background-repeat: no-repeat !important;
-    border-bottom: 1px solid var(--border);   /* 下線（お好みで） */
+    border-bottom: 1px solid var(--border) !important;
 }
 
-/* フッター（ページ最下部） */
+/* 2. ヘッダー内部の要素の背景色を透明化して画像を見せる */
+.nav, .nav .logo, .menu, #menu {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* 3. フッター（ページ最下部） */
 .footer {
     background-image: url('/images/bg.jpg') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    border-top: 1px solid var(--border);      /* 上線（お好みで） */
-    padding: 30px 20px !important;            /* 背景が見えやすいよう少し広げる */
+    border-top: 1px solid var(--border) !important;
+    padding: 30px 20px !important;
 }
 
-/* テキストが見づらい場合の文字色補正（必要に応じて） */
+/* 4. 文字の可読性補正（白い影を付与） */
 .nav a, .footer, .footer a {
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8); /* 白い影をつけて可読性を上げる */
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8) !important;
 }
