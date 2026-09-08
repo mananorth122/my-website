@@ -28,5 +28,5 @@ draft = false
 
 
 
-<p><strong>過去の記事（月ごと）</strong></p>
+<p><strong>過去の Day Log（月ごと）</strong></p>
 
