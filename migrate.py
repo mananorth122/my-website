@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 # ==========================================
 # 処理対象の年月を指定
 # ==========================================
-TARGET_YEAR_MONTH = "2026-4"
+TARGET_YEAR_MONTH = "2026-5"
 
 SKIP_ENTRIES = []
 
