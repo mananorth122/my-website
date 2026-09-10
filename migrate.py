@@ -4,38 +4,38 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-# ==========================================
-# 移行したい年月を指定 (例: "2025-8", "2025-9", "2026-1" など)
-# ==========================================
-TARGET_YEAR_MONTH = "2025-8"  # ここを毎月打ち替えて実行
-
-OUTPUT_DIR = os.path.join("content", "day-log", TARGET_YEAR_MONTH)
+# 出力先を 2025-8 フォルダに設定
+OUTPUT_DIR = os.path.join("content", "day-log", "2025-8")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# 月別 _index.md の自動作成
-year, month = TARGET_YEAR_MONTH.split("-")
+# 2025年8月用のインデックスファイル（_index.md）を自動作成
 index_path = os.path.join(OUTPUT_DIR, "_index.md")
 if not os.path.exists(index_path):
     with open(index_path, "w", encoding="utf-8") as f:
-        f.write(f'+++\ntitle = "{year}年{month}月"\ndraft = false\n+++\n')
+        f.write('+++\ntitle = "2025年8月"\ndate = 2025-08-01\ndraft = false\n+++\n')
 
-BASE_TARGET_URL = f"https://sites.google.com/view/mana-kitazawa/day-log/{TARGET_YEAR_MONTH}"
+AUGUST_URL = "https://sites.google.com/view/mana-kitazawa/day-log/2025-8?authuser=0"
+
+# 除外対象の番号リスト
+SKIP_ENTRIES = []
 
 headers = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 }
 
-def get_article_links():
-    print(f"[{TARGET_YEAR_MONTH}] 記事一覧を取得中: {BASE_TARGET_URL}")
-    res = requests.get(BASE_TARGET_URL, headers=headers)
+def get_august_links():
+    print(f"8月の月別ページから全記事リンクを収集中: {AUGUST_URL}")
+    res = requests.get(AUGUST_URL, headers=headers)
     links = []
     if res.status_code == 200:
         soup = BeautifulSoup(res.text, "html.parser")
         for a in soup.find_all("a", href=True):
             href = a["href"]
-            if "/day-log/" in href and (f"/{TARGET_YEAR_MONTH}/" in href or f"/{year}-{month}/" in href):
+            if "day-log" in href:
                 full_url = "https://sites.google.com" + href if href.startswith("/") else href
-                if not full_url.endswith(f"/day-log/{TARGET_YEAR_MONTH}") and full_url not in links:
+                clean_url = full_url.split("?")[0].rstrip("/")
+                base_clean = AUGUST_URL.split("?")[0].rstrip("/")
+                if clean_url != base_clean and clean_url not in [l.split("?")[0].rstrip("/") for l in links]:
                     links.append(full_url)
     return links
 
@@ -47,102 +47,102 @@ def parse_daylog_article(url):
 
     soup = BeautifulSoup(res.text, "html.parser")
     
-    # 不要な枠組みの除外
     for ignore_tag in soup.find_all(["nav", "header", "footer", "script", "style"]):
         ignore_tag.decompose()
 
-    # ハイライト（background要素）を <mark> に置換
-    for span in soup.find_all(["span", "mark"]):
-        style = span.get("style", "")
-        if "background" in style or span.name == "mark":
-            span.string = f"<mark>{span.get_text()}</mark>"
+    raw_blocks = []
+    for el in soup.find_all(["h1", "h2", "h3", "p", "blockquote", "li"]):
+        text = el.get_text().strip()
+        if text and not any(skip in text for skip in ["Skip to", "Search this site", "Embedded Files", "Report abuse", "Page details"]):
+            if text not in raw_blocks:
+                raw_blocks.append(text)
 
-    # 1行ずつ分解して取得
-    raw_text = soup.get_text(separator="\n")
-    lines = [line.strip() for line in raw_text.split("\n") if line.strip()]
+    full_text = "\n\n".join(raw_blocks)
 
-    cleaned_lines = []
-    for line in lines:
-        if not any(skip in line for skip in ["Skip to", "Search this site", "Embedded Files", "Report abuse", "Page details", "mana-kitazawa"]):
-            cleaned_lines.append(line)
-
-    full_text = "\n".join(cleaned_lines)
-
-    # タイトルと記事番号の抽出 (#6 など)
     title_match = re.search(r"(#(\d+)[^\n\r]+)", full_text)
     if not title_match:
         return False
 
-    full_title = title_match.group(1).strip()
+    full_title = title_match.group(1).strip().split("\n")[0]
     entry_num = title_match.group(2)
 
-    # 日付の抽出
+    if entry_num in SKIP_ENTRIES:
+        print(f"⏭️ スキップ対象 (#{entry_num}): {full_title}")
+        return False
+
     date_match = re.search(r"-(\d{4})-(\d{1,2})-(\d{1,2})$", url.split("?")[0])
     if date_match:
         y, m, d = date_match.groups()
         date_str = f"{y}-{int(m):02d}-{int(d):02d}"
     else:
-        date_str = f"{year}-{int(month):02d}-01"
+        date_str = "2025-08-01"
 
-    # Keywords の抽出 ([ポライトネス] [フェイス] 形式を分解)
+    # 全文からすべての keywords [...] を全件抽出
     keywords = []
-    kw_match = re.search(r"keywords\s*(.*)", full_text, re.IGNORECASE)
-    if kw_match:
-        raw_kw = kw_match.group(1)
-        keywords = [k.strip(" '\"[]") for k in re.split(r"\]\s*\[|,", raw_kw) if k.strip()]
+    kw_matches = re.findall(r"keywords\s*((?:\[.*?\]\s*)+)", full_text, re.IGNORECASE)
+    for kw_str in kw_matches:
+        found = re.findall(r"\[(.*?)\]", kw_str)
+        for k in found:
+            k_clean = k.strip(" '\"[]")
+            if k_clean and k_clean not in keywords:
+                keywords.append(k_clean)
 
-    # 本文と参考の分類
     main_body = []
     reference_lines = []
     capture = False
     in_reference = False
 
-    for line in cleaned_lines:
-        if full_title in line or f"#{entry_num}" in line:
+    for block in raw_blocks:
+        if full_title in block or f"#{entry_num}" in block:
             capture = True
             continue
-
+            
         if capture:
-            # Keywords 行を見つけたらブロック抽出終了
-            if re.match(r"^keywords", line, re.IGNORECASE):
-                break
+            # 判定用から keywords [...] 部分を除去
+            block_clean = re.sub(r"keywords\s*(?:\[.*?\]\s*)+", "", block, flags=re.IGNORECASE).strip()
+            if not block_clean:
+                continue
 
-            # 「参考」または「References」行の検出
-            ref_match = re.match(r"^(参考|References)\s*(.*)", line)
+            # 参考・出典の位置を検知
+            ref_match = re.search(r"(参考|References|出典)", block_clean)
             if ref_match:
+                split_idx = ref_match.start()
+                body_part = block_clean[:split_idx].strip()
+                ref_part = block_clean[split_idx:].strip()
+
+                if body_part and not in_reference:
+                    main_body.append(body_part)
+
                 in_reference = True
-                after_text = ref_match.group(2).strip()
-                if after_text:
-                    reference_lines.append(after_text)
+                cleaned_ref = re.sub(r"^(参考|References|出典)\s*", "", ref_part).strip()
+                if cleaned_ref:
+                    reference_lines.append(cleaned_ref)
                 continue
 
             if in_reference:
-                reference_lines.append(line)
+                reference_lines.append(block_clean)
             else:
-                main_body.append(line)
+                main_body.append(block_clean)
 
     body_content = "\n\n".join(main_body)
 
-    # フッター整形 (最新仕様 #396 と完全統一)
+    # フッター組み立て
     formatted_footer = f"\n\n{{{{< like id=\"day-log-{entry_num}\" >}}}}\n\n---"
 
     if reference_lines:
-        # 参考部分: 末尾に <br> または半角スペース2つを付与して1行ずつ正しく改行
-        ref_text_block = "<br>\n".join(reference_lines)
-        formatted_footer += f"\n\n**参考**  \n{ref_text_block}"
+        ref_text_block = "\n".join(reference_lines)
+        formatted_footer += f"\n**参考文献**  \n{ref_text_block}\n"
 
     if keywords:
-        # カンマ区切りのテキスト表記
-        kw_display = ", ".join(keywords)
+        kw_display = "、".join(keywords)
         formatted_footer += f"\n\n**Keywords**  \n{kw_display}"
 
-    # Front Matter 用の JSON配列形式
     kw_formatted = ", ".join([f'"{k}"' for k in keywords])
-
     md_content = f"""+++
 title = "{full_title}"
 date = {date_str}
 draft = false
+url = "/day-log/{entry_num}/"
 keywords = [{kw_formatted}]
 +++
 
@@ -157,8 +157,8 @@ keywords = [{kw_formatted}]
     return True
 
 if __name__ == "__main__":
-    links = get_article_links()
-    print(f"発見された記事数: {len(links)} 件\n")
+    links = get_august_links()
+    print(f"発見された8月の記事数: {len(links)} 件\n")
     
     success = 0
     for link in links:
@@ -166,4 +166,4 @@ if __name__ == "__main__":
             success += 1
         time.sleep(1)
 
-    print(f"\n🎉 {TARGET_YEAR_MONTH} 分の変換完了! 合計 {success} 件処理しました。")
+    print(f"\n🎉 8月分の変換完了! 合計 {success} 件の処理が終わりました。")

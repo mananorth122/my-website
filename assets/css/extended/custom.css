@@ -219,16 +219,18 @@ mark {
 }
 
 /* ==========================================
-   月別インデックス（全年代対応）のデザイン調整
+   過去の Day Log（月ごと）ピルタグ化（全年代・1桁月対応）
    ========================================== */
 
-/* 1. 月別インデックスカード内の「日付（meta情報）」を完全に非表示 */
+/* 1. 月別インデックスカード内の「日付（2025-8-1等）」を完全に非表示 */
+a[href*="/day-log/"] .entry-footer,
 .post-entry:has(a[href*="/day-log/"]) .entry-footer,
-a[href*="/day-log/"] .entry-footer {
+.post-entry .entry-footer {
     display: none !important;
 }
 
-/* 2. 大きな枠線をコンパクトな丸枠（ピルタグ）に変更 */
+/* 2. すべての月別カードをコンパクトな丸枠（ピルタグ）に変更 */
+.first-entry,
 a[href*="/day-log/"] .post-entry,
 .post-entry:has(a[href*="/day-log/"]) {
     display: inline-block !important;
@@ -242,7 +244,7 @@ a[href*="/day-log/"] .post-entry,
     box-shadow: none !important;
 }
 
-/* ホバー時の装飾 */
+/* 3. ホバー時の装飾 */
 a[href*="/day-log/"]:hover .post-entry,
 .post-entry:has(a[href*="/day-log/"]):hover {
     background-color: var(--accent) !important;
@@ -250,13 +252,15 @@ a[href*="/day-log/"]:hover .post-entry,
     transform: translateY(-1px) !important;
 }
 
-a[href*="/day-log/"]:hover .entry-header h2 {
+a[href*="/day-log/"]:hover .entry-header h2,
+.post-entry:has(a[href*="/day-log/"]):hover .entry-header h2 {
     color: #ffffff !important;
 }
 
-/* タイトル文字の調整 */
+/* 4. タイトル文字の調整 */
+a[href*="/day-log/"] .entry-header h2,
 .post-entry:has(a[href*="/day-log/"]) .entry-header h2,
-a[href*="/day-log/"] .entry-header h2 {
+.post-entry .entry-header h2 {
     font-size: 1rem !important;
     margin: 0 !important;
     padding: 0 !important;
