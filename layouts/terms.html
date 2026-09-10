@@ -1,0 +1,134 @@
+{{- define "main" }}
+{{- if .Title }}
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+</header>
+{{- end }}
+
+<div class="post-content">
+    {{- $terms := .Data.Terms.Alphabetical -}}
+    
+    <div id="keywords-container">
+        <ul class="terms-tags">
+            {{- range $terms }}
+            <li data-name="{{ .Page.Title }}">
+                <a href="{{ .Page.Permalink }}">{{ .Page.Title }} <sup><strong><sup>{{ .Count }}</sup></strong></sup></a>
+            </li>
+            {{- end }}
+        </ul>
+    </div>
+</div>
+
+<style>
+.kana-group-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 1.8rem;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 2px solid var(--border);
+    color: var(--primary);
+}
+.kana-group-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.kana-group-list li a {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--code-bg);
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const container = document.getElementById("keywords-container");
+    const items = Array.from(container.querySelectorAll("li[data-name]"));
+
+    if (items.length === 0) return;
+
+    // アルファベット判定（半角・全角英字で始まるか）
+    const isAlphabet = (str) => /^[a-zA-ZＡ-Ｚa-z]/.test(str);
+
+    // 1. 全体をあいうえお順（日本語ロケール）でソート
+    items.sort((a, b) => {
+        const nameA = a.dataset.name;
+        const nameB = b.dataset.name;
+
+        const isAAlpha = isAlphabet(nameA);
+        const isBAlpha = isAlphabet(nameB);
+
+        // アルファベット同士、日本語同士、あるいは混合のソート判定
+        if (isAAlpha && isBAlpha) {
+            return nameA.localeCompare(nameB, 'en', { sensitivity: 'base' });
+        }
+        return nameA.localeCompare(nameB, 'ja');
+    });
+
+    // 五十音行の判定ルール
+    const kanaRows = [
+        { name: "あ行", re: /^[あ-おア-オアイウエオ]/ },
+        { name: "か行", re: /^[か-ごカ-ゴ]/ },
+        { name: "さ行", re: /^[さ-ぞサ-ゾ]/ },
+        { name: "た行", re: /^[た-どタ-ド]/ },
+        { name: "な行", re: /^[な-のナ-ノ]/ },
+        { name: "は行", re: /^[は-ぼハ-ホパ-ポ]/ },
+        { name: "ま行", re: /^[ま-もマ-モ]/ },
+        { name: "や行", re: /^[や-よヤ-ヨ]/ },
+        { name: "ら行", re: /^[ら-ろラ-ロ]/ },
+        { name: "わ行", re: /^[わ-んワ-ン]/ }
+    ];
+
+    // グループ振り分け処理
+    const groups = {};
+    items.forEach(item => {
+        const name = item.dataset.name;
+        let matchedRow = "その他";
+
+        if (isAlphabet(name)) {
+            matchedRow = "アルファベット（A-Z）";
+        } else {
+            for (const row of kanaRows) {
+                if (row.re.test(name)) {
+                    matchedRow = row.name;
+                    break;
+                }
+            }
+        }
+
+        if (!groups[matchedRow]) groups[matchedRow] = [];
+        groups[matchedRow].push(item);
+    });
+
+    container.innerHTML = ""; // 元の一覧をリセット
+
+    // 出力順序（アルファベットを先頭、または最後に配置可能）
+    const rowOrder = [
+        "アルファベット（A-Z）",
+        "あ行", "か行", "さ行", "た行", "な行", 
+        "は行", "ま行", "や行", "ら行", "わ行", 
+        "その他"
+    ];
+
+    rowOrder.forEach(rowName => {
+        if (groups[rowName] && groups[rowName].length > 0) {
+            const titleNode = document.createElement("div");
+            titleNode.className = "kana-group-title";
+            titleNode.textContent = rowName;
+            container.appendChild(titleNode);
+
+            const listNode = document.createElement("ul");
+            listNode.className = "kana-group-list";
+            groups[rowName].forEach(item => listNode.appendChild(item));
+            container.appendChild(listNode);
+        }
+    });
+});
+</script>
+{{- end }}
