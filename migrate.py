@@ -4,19 +4,15 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-# 出力先を 2025-8 フォルダに設定
 OUTPUT_DIR = os.path.join("content", "day-log", "2025-8")
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
-# 2025年8月用のインデックスファイル（_index.md）を自動作成
 index_path = os.path.join(OUTPUT_DIR, "_index.md")
 if not os.path.exists(index_path):
     with open(index_path, "w", encoding="utf-8") as f:
         f.write('+++\ntitle = "2025年8月"\ndate = 2025-08-01\ndraft = false\n+++\n')
 
 AUGUST_URL = "https://sites.google.com/view/mana-kitazawa/day-log/2025-8?authuser=0"
-
-# 除外対象の番号リスト
 SKIP_ENTRIES = []
 
 headers = {
@@ -39,6 +35,34 @@ def get_august_links():
                     links.append(full_url)
     return links
 
+def process_element_formatting(el):
+    for tag in el.find_all(["mark", "span"]):
+        style = tag.get("style", "").lower()
+        if tag.name == "mark" or "background-color" in style or "background" in style:
+            tag.replace_with(f"<mark>{tag.text}</mark>")
+            
+    for tag in el.find_all(["b", "strong"]):
+        tag.replace_with(f"**{tag.text}**")
+        
+    return el.get_text().strip()
+
+def format_references(ref_lines):
+    """
+    1行に固まってしまった参考文献を著者名や年号、番号などを基準に改行を入れる処理
+    """
+    raw_ref_text = "\n".join(ref_lines)
+    
+    # 著者名 + 年号 (例: 野村益寛 (2014) や Tanaka, J. (2020) や [1] など) の直前で強制改行
+    # パターン1: 「文字. (年)」や「名前 (年)」のパターンで分割
+    formatted = re.sub(r'([^\n])\s*([A-Z\u3040-\u30ff\u4e00-\u9faf]+(?:\s+[A-Z\u3040-\u30ff\u4e00-\u9faf]+)*\s*[\(\（]\d{4}[\)\）])', r'\1\n\2', raw_ref_text)
+    
+    # パターン2: 「1. 」「[1] 」などの箇条書き番号の直前で改行
+    formatted = re.sub(r'([^\n])\s*(\[\d+\]|\d+\.\s+)', r'\1\n\2', formatted)
+    
+    # Markdownの改行（末尾スペース2つ + 改行）に変換
+    lines = [line.strip() for line in formatted.split("\n") if line.strip()]
+    return "  \n".join(lines)
+
 def parse_daylog_article(url):
     res = requests.get(url, headers=headers)
     if res.status_code != 200:
@@ -52,7 +76,7 @@ def parse_daylog_article(url):
 
     raw_blocks = []
     for el in soup.find_all(["h1", "h2", "h3", "p", "blockquote", "li"]):
-        text = el.get_text().strip()
+        text = process_element_formatting(el)
         if text and not any(skip in text for skip in ["Skip to", "Search this site", "Embedded Files", "Report abuse", "Page details"]):
             if text not in raw_blocks:
                 raw_blocks.append(text)
@@ -64,6 +88,9 @@ def parse_daylog_article(url):
         return False
 
     full_title = title_match.group(1).strip().split("\n")[0]
+    full_title = re.sub(r"</?mark>", "", full_title)
+    full_title = re.sub(r"\*\*", "", full_title)
+    
     entry_num = title_match.group(2)
 
     if entry_num in SKIP_ENTRIES:
@@ -77,13 +104,13 @@ def parse_daylog_article(url):
     else:
         date_str = "2025-08-01"
 
-    # 全文からすべての keywords [...] を全件抽出
     keywords = []
     kw_matches = re.findall(r"keywords\s*((?:\[.*?\]\s*)+)", full_text, re.IGNORECASE)
     for kw_str in kw_matches:
         found = re.findall(r"\[(.*?)\]", kw_str)
         for k in found:
             k_clean = k.strip(" '\"[]")
+            k_clean = re.sub(r"</?mark>", "", k_clean)
             if k_clean and k_clean not in keywords:
                 keywords.append(k_clean)
 
@@ -98,13 +125,11 @@ def parse_daylog_article(url):
             continue
             
         if capture:
-            # 判定用から keywords [...] 部分を除去
             block_clean = re.sub(r"keywords\s*(?:\[.*?\]\s*)+", "", block, flags=re.IGNORECASE).strip()
             if not block_clean:
                 continue
 
-            # 参考・出典の位置を検知
-            ref_match = re.search(r"(参考|References|出典)", block_clean)
+            ref_match = re.search(r"(参考|References)", block_clean)
             if ref_match:
                 split_idx = ref_match.start()
                 body_part = block_clean[:split_idx].strip()
@@ -114,7 +139,7 @@ def parse_daylog_article(url):
                     main_body.append(body_part)
 
                 in_reference = True
-                cleaned_ref = re.sub(r"^(参考|References|出典)\s*", "", ref_part).strip()
+                cleaned_ref = re.sub(r"^(参考|References)\s*", "", ref_part).strip()
                 if cleaned_ref:
                     reference_lines.append(cleaned_ref)
                 continue
@@ -126,12 +151,12 @@ def parse_daylog_article(url):
 
     body_content = "\n\n".join(main_body)
 
-    # フッター組み立て
     formatted_footer = f"\n\n{{{{< like id=\"day-log-{entry_num}\" >}}}}\n\n---"
 
     if reference_lines:
-        ref_text_block = "\n".join(reference_lines)
-        formatted_footer += f"\n**参考文献**  \n{ref_text_block}\n"
+        # ★文献ごとに自動改行してMarkdown表示を整える
+        ref_text_block = format_references(reference_lines)
+        formatted_footer += f"\n\n**参考**  \n{ref_text_block}"
 
     if keywords:
         kw_display = "、".join(keywords)
