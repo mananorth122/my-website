@@ -1,6 +1,6 @@
 +++
 title = "ツゥラトゥストラはこう言った（上）"
-date = "2025-3-20"
+date = "2025-03-20"
 author = "ニーチェ著 水上英廣"
 draft = false
 url = "/book-log/book3/"
