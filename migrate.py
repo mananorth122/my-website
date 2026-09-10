@@ -34,21 +34,24 @@ def get_article_links():
         soup = BeautifulSoup(res.text, "html.parser")
         for a in soup.find_all("a", href=True):
             href = a["href"]
-            # 判定条件を緩和：URLに "/day-log/" が含まれ、かつ末尾側が記事詳細の形式になっているものを収集
             if "/day-log/" in href and (f"/{TARGET_YEAR_MONTH}/" in href or f"/{year}-{month}/" in href):
                 full_url = "https://sites.google.com" + href if href.startswith("/") else href
-                # 月のトップページ自体を除外
                 if not full_url.endswith(f"/day-log/{TARGET_YEAR_MONTH}") and full_url not in links:
                     links.append(full_url)
     return links
 
-def convert_highlights(soup_element):
-    """ Google Sites の蛍光ペン/ハイライト要素を <mark> タグに変換 """
-    for tag in soup_element.find_all(["span", "mark"]):
-        style = tag.get("style", "")
-        if "background" in style or tag.name == "mark":
-            tag.string = f"<mark>{tag.get_text()}</mark>"
-    return soup_element
+def process_element_html(el):
+    """ 要素内のハイライト背景色・markタグを標準的な <mark> に置換して抽出 """
+    # Google Sites の蛍光ペン（style属性の background）または mark タグを認識
+    for span in el.find_all(["span", "mark"]):
+        style = span.get("style", "")
+        if "background" in style or span.name == "mark":
+            span.string = f"__MARK_START__{span.get_text()}__MARK_END__"
+
+    text = el.get_text().strip()
+    # 独自のプレースホルダーを実際の <mark> タグに変換
+    text = text.replace("__MARK_START__", "<mark>").replace("__MARK_END__", "</mark>")
+    return text
 
 def parse_daylog_article(url):
     res = requests.get(url, headers=headers)
@@ -61,13 +64,9 @@ def parse_daylog_article(url):
     for ignore_tag in soup.find_all(["nav", "header", "footer", "script", "style"]):
         ignore_tag.decompose()
 
-    soup = convert_highlights(soup)
-
     raw_blocks = []
     for el in soup.find_all(["h1", "h2", "h3", "p", "blockquote", "li"]):
-        text = "".join([str(c) for c in el.contents]).strip()
-        text = re.sub(r'<(?!/?mark>)[^>]+>', '', text).strip()
-
+        text = process_element_html(el)
         if text and not any(skip in text for skip in ["Skip to", "Search this site", "Embedded Files", "Report abuse", "Page details"]):
             if text not in raw_blocks:
                 raw_blocks.append(text)
@@ -97,6 +96,7 @@ def parse_daylog_article(url):
         raw_kw = kw_match.group(1)
         keywords = [k.strip(" '\"[]") for k in re.split(r"\]\s*\[|,", raw_kw) if k.strip()]
 
+    # 本文・参考・キーワードの抽出判定
     main_body = []
     reference_lines = []
     capture = False
@@ -108,14 +108,17 @@ def parse_daylog_article(url):
             continue
             
         if capture:
+            # Keywordsのブロックに達したら本文・参考の取得を終了
             if re.match(r"^keywords", block, re.IGNORECASE):
                 break
 
-            if re.search(r"^(参考|References)", block) or (not in_reference and "参考" in block and len(block) < 10):
+            # 「参考」または「References」が含まれる場合の判定（一体化対策）
+            ref_header_match = re.match(r"^(参考|References)\s*(.*)", block, re.DOTALL)
+            if ref_header_match:
                 in_reference = True
-                cleaned_ref = re.sub(r"^(参考|References)\s*", "", block).strip()
-                if cleaned_ref:
-                    reference_lines.append(cleaned_ref)
+                content_after_ref = ref_header_match.group(2).strip()
+                if content_after_ref:
+                    reference_lines.append(content_after_ref)
                 continue
 
             if in_reference:
@@ -129,7 +132,8 @@ def parse_daylog_article(url):
     formatted_footer = f"\n\n{{{{< like id=\"day-log-{entry_num}\" >}}}}\n\n---"
 
     if reference_lines:
-        ref_text_block = "  \n".join(reference_lines)
+        # 参考文献を確実に1行ずつ改行させるため <br> を挟む
+        ref_text_block = "<br>\n".join(reference_lines)
         formatted_footer += f"\n\n**参考**  \n{ref_text_block}"
 
     if keywords:
