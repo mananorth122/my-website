@@ -219,18 +219,18 @@ mark {
 }
 
 /* ==========================================
-   月別インデックス（2026年8月/9月等）のデザイン調整
+   月別インデックス（全年代対応）のデザイン調整
    ========================================== */
 
 /* 1. 月別インデックスカード内の「日付（meta情報）」を完全に非表示 */
-.post-entry:has(a[href*="/day-log/2026-"]) .entry-footer,
-a[href*="/day-log/2026-"] .entry-footer {
+.post-entry:has(a[href*="/day-log/"]) .entry-footer,
+a[href*="/day-log/"] .entry-footer {
     display: none !important;
 }
 
 /* 2. 大きな枠線をコンパクトな丸枠（ピルタグ）に変更 */
-a[href*="/day-log/2026-"] .post-entry,
-.post-entry:has(a[href*="/day-log/2026-"]) {
+a[href*="/day-log/"] .post-entry,
+.post-entry:has(a[href*="/day-log/"]) {
     display: inline-block !important;
     width: auto !important;
     min-height: auto !important;
@@ -243,20 +243,20 @@ a[href*="/day-log/2026-"] .post-entry,
 }
 
 /* ホバー時の装飾 */
-a[href*="/day-log/2026-"]:hover .post-entry,
-.post-entry:has(a[href*="/day-log/2026-"]):hover {
+a[href*="/day-log/"]:hover .post-entry,
+.post-entry:has(a[href*="/day-log/"]):hover {
     background-color: var(--accent) !important;
     border-color: var(--accent) !important;
     transform: translateY(-1px) !important;
 }
 
-a[href*="/day-log/2026-"]:hover .entry-header h2 {
+a[href*="/day-log/"]:hover .entry-header h2 {
     color: #ffffff !important;
 }
 
 /* タイトル文字の調整 */
-.post-entry:has(a[href*="/day-log/2026-"]) .entry-header h2,
-a[href*="/day-log/2026-"] .entry-header h2 {
+.post-entry:has(a[href*="/day-log/"]) .entry-header h2,
+a[href*="/day-log/"] .entry-header h2 {
     font-size: 1rem !important;
     margin: 0 !important;
     padding: 0 !important;

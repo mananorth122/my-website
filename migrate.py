@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 # ==========================================
 TARGET_YEAR_MONTH = "2025-8"  # ここを毎月打ち替えて実行
 
-# 出力先ディレクトリの設定
 OUTPUT_DIR = os.path.join("content", "day-log", TARGET_YEAR_MONTH)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
@@ -40,19 +39,6 @@ def get_article_links():
                     links.append(full_url)
     return links
 
-def process_element_html(el):
-    """ 要素内のハイライト背景色・markタグを標準的な <mark> に置換して抽出 """
-    # Google Sites の蛍光ペン（style属性の background）または mark タグを認識
-    for span in el.find_all(["span", "mark"]):
-        style = span.get("style", "")
-        if "background" in style or span.name == "mark":
-            span.string = f"__MARK_START__{span.get_text()}__MARK_END__"
-
-    text = el.get_text().strip()
-    # 独自のプレースホルダーを実際の <mark> タグに変換
-    text = text.replace("__MARK_START__", "<mark>").replace("__MARK_END__", "</mark>")
-    return text
-
 def parse_daylog_article(url):
     res = requests.get(url, headers=headers)
     if res.status_code != 200:
@@ -61,24 +47,33 @@ def parse_daylog_article(url):
 
     soup = BeautifulSoup(res.text, "html.parser")
     
+    # 不要な枠組みの除外
     for ignore_tag in soup.find_all(["nav", "header", "footer", "script", "style"]):
         ignore_tag.decompose()
 
-    raw_blocks = []
-    for el in soup.find_all(["h1", "h2", "h3", "p", "blockquote", "li"]):
-        text = process_element_html(el)
-        if text and not any(skip in text for skip in ["Skip to", "Search this site", "Embedded Files", "Report abuse", "Page details"]):
-            if text not in raw_blocks:
-                raw_blocks.append(text)
+    # ハイライト（background要素）を <mark> に置換
+    for span in soup.find_all(["span", "mark"]):
+        style = span.get("style", "")
+        if "background" in style or span.name == "mark":
+            span.string = f"<mark>{span.get_text()}</mark>"
 
-    full_text = "\n\n".join(raw_blocks)
+    # 1行ずつ分解して取得
+    raw_text = soup.get_text(separator="\n")
+    lines = [line.strip() for line in raw_text.split("\n") if line.strip()]
 
-    # タイトルと記事番号の抽出
+    cleaned_lines = []
+    for line in lines:
+        if not any(skip in line for skip in ["Skip to", "Search this site", "Embedded Files", "Report abuse", "Page details", "mana-kitazawa"]):
+            cleaned_lines.append(line)
+
+    full_text = "\n".join(cleaned_lines)
+
+    # タイトルと記事番号の抽出 (#6 など)
     title_match = re.search(r"(#(\d+)[^\n\r]+)", full_text)
     if not title_match:
         return False
 
-    full_title = title_match.group(1).strip().split("\n")[0]
+    full_title = title_match.group(1).strip()
     entry_num = title_match.group(2)
 
     # 日付の抽出
@@ -89,59 +84,61 @@ def parse_daylog_article(url):
     else:
         date_str = f"{year}-{int(month):02d}-01"
 
-    # Keywordsの抽出
+    # Keywords の抽出 ([ポライトネス] [フェイス] 形式を分解)
     keywords = []
-    kw_match = re.search(r"keywords\s*\[(.*?)\]", full_text, re.IGNORECASE)
+    kw_match = re.search(r"keywords\s*(.*)", full_text, re.IGNORECASE)
     if kw_match:
         raw_kw = kw_match.group(1)
         keywords = [k.strip(" '\"[]") for k in re.split(r"\]\s*\[|,", raw_kw) if k.strip()]
 
-    # 本文・参考・キーワードの抽出判定
+    # 本文と参考の分類
     main_body = []
     reference_lines = []
     capture = False
     in_reference = False
 
-    for block in raw_blocks:
-        if full_title in block or f"#{entry_num}" in block:
+    for line in cleaned_lines:
+        if full_title in line or f"#{entry_num}" in line:
             capture = True
             continue
-            
+
         if capture:
-            # Keywordsのブロックに達したら本文・参考の取得を終了
-            if re.match(r"^keywords", block, re.IGNORECASE):
+            # Keywords 行を見つけたらブロック抽出終了
+            if re.match(r"^keywords", line, re.IGNORECASE):
                 break
 
-            # 「参考」または「References」が含まれる場合の判定（一体化対策）
-            ref_header_match = re.match(r"^(参考|References)\s*(.*)", block, re.DOTALL)
-            if ref_header_match:
+            # 「参考」または「References」行の検出
+            ref_match = re.match(r"^(参考|References)\s*(.*)", line)
+            if ref_match:
                 in_reference = True
-                content_after_ref = ref_header_match.group(2).strip()
-                if content_after_ref:
-                    reference_lines.append(content_after_ref)
+                after_text = ref_match.group(2).strip()
+                if after_text:
+                    reference_lines.append(after_text)
                 continue
 
             if in_reference:
-                reference_lines.append(block)
+                reference_lines.append(line)
             else:
-                main_body.append(block)
+                main_body.append(line)
 
     body_content = "\n\n".join(main_body)
 
-    # フッター組み立て
+    # フッター整形 (最新仕様 #396 と完全統一)
     formatted_footer = f"\n\n{{{{< like id=\"day-log-{entry_num}\" >}}}}\n\n---"
 
     if reference_lines:
-        # 参考文献を確実に1行ずつ改行させるため <br> を挟む
+        # 参考部分: 末尾に <br> または半角スペース2つを付与して1行ずつ正しく改行
         ref_text_block = "<br>\n".join(reference_lines)
         formatted_footer += f"\n\n**参考**  \n{ref_text_block}"
 
     if keywords:
+        # カンマ区切りのテキスト表記
         kw_display = ", ".join(keywords)
         formatted_footer += f"\n\n**Keywords**  \n{kw_display}"
 
+    # Front Matter 用の JSON配列形式
     kw_formatted = ", ".join([f'"{k}"' for k in keywords])
-    
+
     md_content = f"""+++
 title = "{full_title}"
 date = {date_str}
