@@ -3,9 +3,6 @@ languageCode = 'ja-jp'
 title = '北澤茉奈のホームページ'
 theme = 'PaperMod'
 
-# Google アナリティクス（GA4）の設定
-googleAnalytics = "G-ESFQPL7RB9"
-
 hasCJKLanguage = true
 
 # タクソノミー（キーワード自動集計）の設定を明示
