@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (items.length === 0) return;
 
-    // 漢字キーワードの読み（ひらがな）変換辞書
+    // 従来の漢字キーワード読み（ひらがな）変換辞書（そのまま保持）
     const kanjiToKana = {
         "上からの変化": "うえからのへんか", "不確実性の回避": "ふかくじつせいのかいひ", "中動態": "ちゅうどうたい",
         "二言語使用": "にげんごしよう", "二重分節性": "にじゅうぶんせつせい", "互換性": "ごかんせい",
@@ -108,25 +108,59 @@ document.addEventListener("DOMContentLoaded", function () {
         "頭韻": "とういん", "類型": "るいけい", "高コンテクスト": "こうこんてくすと"
     };
 
+    // アルファベット判定
     const isAlphabet = (str) => /^[a-zA-ZＡ-Ｚa-z]/.test(str);
 
-    // 単語の「読み（キー）」を取得する関数
-    const getSortKey = (name) => {
-        if (kanjiToKana[name]) return kanjiToKana[name];
-        return name;
+    // 単語から「表示名」と「ソート用の読み」を判定する関数
+    const parseKeyword = (rawName) => {
+        // 1. 新ルール：括弧（...）または (...) がある場合
+        const match = rawName.match(/^(.+?)[（\(](.+?)[）\)]$/);
+        if (match) {
+            return {
+                displayName: match[1].trim(), // 表示名（括弧除去）
+                sortKey: match[2].trim()      // 括弧内のふりがな
+            };
+        }
+
+        // 2. 従来ルール：辞書（kanjiToKana）にある場合
+        if (kanjiToKana[rawName]) {
+            return {
+                displayName: rawName,
+                sortKey: kanjiToKana[rawName]
+            };
+        }
+
+        // 3. どちらにも該当しない場合（そのまま）
+        return {
+            displayName: rawName,
+            sortKey: rawName
+        };
     };
 
-    // 1. あいうえお順にソート
-    items.sort((a, b) => {
-        const nameA = a.dataset.name;
-        const nameB = b.dataset.name;
-        const keyA = getSortKey(nameA);
-        const keyB = getSortKey(nameB);
+    // データ一覧を処理
+    const parsedItems = items.map(item => {
+        const rawName = item.dataset.name;
+        const { displayName, sortKey } = parseKeyword(rawName);
 
-        if (isAlphabet(nameA) && isAlphabet(nameB)) {
-            return nameA.localeCompare(nameB, 'en', { sensitivity: 'base' });
+        // <a>タグの中身のテキストから「(ふりがな)」を削除して見た目を整える
+        const link = item.querySelector("a");
+        if (link && link.childNodes.length > 0) {
+            link.childNodes[0].textContent = displayName + " ";
         }
-        return keyA.localeCompare(keyB, 'ja');
+
+        return {
+            element: item,
+            displayName: displayName,
+            sortKey: sortKey
+        };
+    });
+
+    // 1. あいうえお順（およびアルファベット順）にソート
+    parsedItems.sort((a, b) => {
+        if (isAlphabet(a.displayName) && isAlphabet(b.displayName)) {
+            return a.displayName.localeCompare(b.displayName, 'en', { sensitivity: 'base' });
+        }
+        return a.sortKey.localeCompare(b.sortKey, 'ja');
     });
 
     // 五十音判定ルール
@@ -144,16 +178,14 @@ document.addEventListener("DOMContentLoaded", function () {
     ];
 
     const groups = {};
-    items.forEach(item => {
-        const name = item.dataset.name;
-        const key = getSortKey(name);
+    parsedItems.forEach(itemData => {
         let matchedRow = "その他";
 
-        if (isAlphabet(name)) {
+        if (isAlphabet(itemData.displayName)) {
             matchedRow = "アルファベット（A-Z）";
         } else {
             for (const row of kanaRows) {
-                if (row.re.test(key)) {
+                if (row.re.test(itemData.sortKey)) {
                     matchedRow = row.name;
                     break;
                 }
@@ -161,7 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         if (!groups[matchedRow]) groups[matchedRow] = [];
-        groups[matchedRow].push(item);
+        groups[matchedRow].push(itemData.element);
     });
 
     container.innerHTML = "";
@@ -182,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const listNode = document.createElement("ul");
             listNode.className = "kana-group-list";
-            groups[rowName].forEach(item => listNode.appendChild(item));
+            groups[rowName].forEach(el => listNode.appendChild(el));
             container.appendChild(listNode);
         }
     });
