@@ -8,7 +8,7 @@
   gtag('config', 'G-ESFQPL7RB9');
 </script>
 
-<!-- Book Log 自動バッジ生成スクリプト（静的） -->
+<!-- Book Log 自動バッジ生成スクリプト（レイアウト分離版） -->
 <script>
 function renderBookBadges() {
   const allLinks = document.querySelectorAll('a[href*="book"]');
@@ -25,8 +25,9 @@ function renderBookBadges() {
         badge.className = 'book-badge';
         badge.textContent = `Vol.${num}`;
         
-        const titleTarget = link.querySelector('h2') || link.querySelector('.post-title') || link;
-        titleTarget.prepend(badge);
+        // h2 または .entry-header の一番先頭に配置
+        const header = link.querySelector('.entry-header') || link.querySelector('h2') || link;
+        header.insertBefore(badge, header.firstChild);
       }
     }
   });
