@@ -1,4 +1,3 @@
-{{/* URLに "/book-log/book" が含まれる場合、数字だけを自動抽出してバッジ出力 */}}
-{{ if contains .RelPermalink "/book-log/book" }}
+{{ if strings.Contains .RelPermalink "/book-log/book" }}
   <span class="book-badge">Vol.{{ printf "%02d" (int (replaceRE `[^0-9]` "" .RelPermalink)) }}</span>
 {{ end }}
