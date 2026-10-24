@@ -3,7 +3,7 @@ title = "街場の教育論"
 date = "2026-09-10"
 author = "内田 樹"
 draft = false
-url = "/book-log/book37/"
+url = "/book-log/book35/"
 +++
 
 <p><img src="/images/book_0910.jpg" alt="街場の教育論" style="max-width: 260px; border-radius: 8px; border: 1.5px solid var(--border);"></p>

@@ -3,7 +3,7 @@ title = "「書く」って、どんなこと？"
 date = "2025-08-17"
 author = "高橋源一郎"
 draft = false
-url = "/book-log/book11/"
+url = "/book-log/book9/"
 +++
 
 これからホームページを毎日書くぞ〜と思っていたらこの本とたまたま遭遇。

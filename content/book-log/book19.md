@@ -3,7 +3,7 @@ title = "「好き」を言語化する技術"
 date = "2026-04-24"
 author = "三宅香帆"
 draft = false
-url = "/book-log/book21/"
+url = "/book-log/book19/"
 +++
 
 こちらも三省堂で、『本を読めなくなった人たち』のとなりに置かれていたので手に取りました。

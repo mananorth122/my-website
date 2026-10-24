@@ -3,7 +3,7 @@ title = "お許しいただければ"
 date = "2026-07-26"
 author = "行方昭夫編訳"
 draft = false
-url = "/book-log/book32/"
+url = "/book-log/book30/"
 +++
 
 今回は少し期間が空いてしまいましたが、気のゆくままに読み進められました。

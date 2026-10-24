@@ -3,7 +3,7 @@ title = "最後の秘境 東京藝大"
 date = "2025-09-27"
 author = "二宮敦人"
 draft = false
-url = "/book-log/book15/"
+url = "/book-log/book13/"
 +++
 
 随分と時間をかけてしまいましたがやっと読み終わりました。エピソード満天。

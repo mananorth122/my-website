@@ -3,7 +3,7 @@ title = "本を読めなくなった人たち"
 date = "2026-04-21"
 author = "稲田豊史"
 draft = false
-url = "/book-log/book20/"
+url = "/book-log/book18/"
 +++
 
 リニューアルした三省堂で手に取った一冊。

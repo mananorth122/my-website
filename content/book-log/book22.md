@@ -3,7 +3,7 @@ title = "不倫"
 date = "2026-05-10"
 author = "パウロ・コエーリョ 木下眞穂 訳"
 draft = false
-url = "/book-log/book24/"
+url = "/book-log/book22/"
 +++
 
 久しぶりに訪れた中川書房で手にした一冊。

@@ -3,7 +3,7 @@ title = "プラハの古本屋"
 date = "2026-06-07"
 author = "千野栄一"
 draft = false
-url = "/book-log/book27/"
+url = "/book-log/book25/"
 +++
 
 母と一緒に購入した一冊。古本屋巡りの神髄を見て、私はまだまだだと動悸のする一冊でした。

@@ -3,7 +3,7 @@ title = "ブッダの小ばなし"
 date = "2026-04-26"
 author = "釈 徹宗 (監修), 多田 修 (翻訳)"
 draft = false
-url = "/book-log/book22/"
+url = "/book-log/book20/"
 +++
 
 美容誌『Oggi』のコラムで紹介されていたのがきっかけで手に取った一冊です。

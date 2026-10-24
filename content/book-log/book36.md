@@ -3,7 +3,7 @@ title = "戦争犯罪と闘う"
 date = "2026-09-26"
 author = "赤根智子"
 draft = false
-url = "/book-log/book38/"
+url = "/book-log/book36/"
 +++
 
 <p><img src="/images/book_0926.jpg" alt="戦争犯罪と闘う" style="max-width: 260px; border-radius: 8px; border: 1.5px solid var(--border);"></p>

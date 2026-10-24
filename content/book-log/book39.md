@@ -3,7 +3,7 @@ title = "「いくつになっても冴えている人」の言葉の習慣"
 date = "2026-10-19"
 author = "齋藤孝 和田秀樹"
 draft = false
-url = "/book-log/book41/"
+url = "/book-log/book39/"
 +++
 
 <p><img src="/images/book_1024.jpg" alt="「いくつになっても冴えている人」の言葉の習慣" style="max-width: 260px; border-radius: 8px; border: 1.5px solid var(--border);"></p>

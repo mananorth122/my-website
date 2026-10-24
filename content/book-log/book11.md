@@ -3,7 +3,7 @@ title = "あきらめない人生"
 date = "2025-08-20"
 author = "瀬戸内寂聴"
 draft = false
-url = "/book-log/book13/"
+url = "/book-log/book11/"
 +++
 
 神保町の古本屋で手にした一冊。声に出して言いづらいことも、優しく、それでいて鋭く指摘している。
