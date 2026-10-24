@@ -306,20 +306,13 @@ a[href*="/day-log/"] .entry-header h2,
 }
 
 /* ==========================================
-   Book Log バッジ：カード内の完全右端配置
+   Book Log バッジ：カード右上に絶対配置（右端固定）
    ========================================== */
 
-/* 1. タイトル行を横並びFlexにし、両端揃え（space-between）に指定 */
-.post-entry .entry-header h2,
-.post-entry .post-title,
-.post-entry h2 {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: space-between !important; /* タイトルを左、バッジを完全右へ */
-    width: 100% !important;
-    gap: 12px !important;
-    margin: 0 0 8px 0 !important;
-    position: static !important;
+/* 1. カード（親要素）の位置基準を固定し、右側にバッジ分の余白（padding-right）を確保 */
+.post-entry {
+    position: relative !important;
+    padding-right: 90px !important; /* バッジが長いタイトルと重ならないための右余白 */
 }
 
 /* 2. テーマ側の不要な疑似要素を無効化 */
@@ -329,9 +322,11 @@ a[href*="/day-log/"] .entry-header h2,
     display: none !important;
 }
 
-/* 3. バッジ本体（右端固定・静的） */
+/* 3. バッジ本体をカードの右上に強制配置 */
 .book-badge {
-    position: static !important;
+    position: absolute !important;
+    top: 20px !important;            /* 上からの位置（カードの余白に合わせる） */
+    right: 24px !important;          /* 右端からの位置 */
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -344,17 +339,16 @@ a[href*="/day-log/"] .entry-header h2,
     line-height: 1 !important;
     letter-spacing: 0.05em !important;
     
-    /* デザイン */
+    /* 配色と形状 */
     color: var(--accent) !important;
     background-color: var(--tertiary) !important;
     border: 1px solid var(--border) !important;
-    padding: 3px 8px !important;
+    padding: 4px 10px !important;
     border-radius: 12px !important;
     
-    /* 右端に押し出す設定 */
-    margin-left: auto !important;
-    flex-shrink: 0 !important;
+    /* 静的表示（変形・アニメーションなし） */
     transform: none !important;
     transition: none !important;
     box-shadow: none !important;
+    z-index: 2 !important;
 }
