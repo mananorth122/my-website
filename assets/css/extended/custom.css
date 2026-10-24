@@ -306,7 +306,7 @@ a[href*="/day-log/"] .entry-header h2,
 }
 
 /* ==========================================
-   Book Log Hugo自動抽出バッジ（手動追加ゼロ仕様）
+   Book Log 完全自動生成バッジ（JS連携用）
    ========================================== */
 
 .book-badge {
@@ -317,21 +317,19 @@ a[href*="/day-log/"] .entry-header h2,
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.08em;
-    color: var(--accent) !important;
-    background: rgba(255, 255, 255, 0.7) !important;
-    border: 1px solid rgba(217, 104, 112, 0.35) !important;
+    color: var(--accent);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(217, 104, 112, 0.4);
     padding: 1px 10px;
     border-radius: 20px;
     margin-right: 10px;
-    box-shadow: 0 2px 8px rgba(217, 104, 112, 0.12);
-    transform: translateY(-1px);
-    transition: all 0.25s ease;
+    box-shadow: 0 2px 6px rgba(217, 104, 112, 0.12);
+    vertical-align: middle;
 }
 
-/* ホバー時にバッジの色をアクセントカラーに反転 */
+/* ホバー時の反転 */
 .post-entry:hover .book-badge {
-    background: var(--accent) !important;
-    color: #ffffff !important;
-    border-color: var(--accent) !important;
-    box-shadow: 0 4px 12px rgba(217, 104, 112, 0.3);
+    background: var(--accent);
+    color: #ffffff;
+    border-color: var(--accent);
 }
