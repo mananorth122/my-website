@@ -1,8 +1,10 @@
-{{/* URLパラメータまたはパーマリンクから book + 数字 を検索して抽出 */}}
-{{ $targetUrl := .Params.url | default .RelPermalink | default .Permalink }}
-{{ $num := replaceRE `.*book-log/book([0-9]+).*` "$1" $targetUrl }}
-
-{{/* 数字が正常に抽出できている場合のみバッジを出力 */}}
-{{ if ne $num $targetUrl }}
-  <span class="book-badge">Vol.{{ printf "%02d" (int $num) }}</span>
+{{/* ファイル名（book39など）から数字だけを抽出 */}}
+{{ if .File }}
+  {{ $fileName := .File.TranslationBaseName }}
+  {{ if strings.HasPrefix $fileName "book" }}
+    {{ $num := replaceRE `[^0-9]` "" $fileName }}
+    {{ if $num }}
+      <span class="book-badge">Vol.{{ printf "%02d" (int $num) }}</span>
+    {{ end }}
+  {{ end }}
 {{ end }}
