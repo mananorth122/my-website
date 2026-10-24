@@ -3,7 +3,7 @@ title = "悪口ってなんだろう"
 date = "2026-10-07"
 author = "和泉悠"
 draft = false
-url = "/book-log/book37/"
+url = "/book-log/book39/"
 +++
 
 <p><img src="/images/book_1007.jpg" alt="悪口ってなんだろう" style="max-width: 260px; border-radius: 8px; border: 1.5px solid var(--border);"></p>

@@ -3,7 +3,7 @@ title = "下山の時代を生きる"
 date = "2026-10-18"
 author = "鈴木孝夫 平田オリザ"
 draft = false
-url = "/book-log/book38/"
+url = "/book-log/book40/"
 +++
 
 <p><img src="/images/book_1018.jpg" alt="下山の時代を生きる" style="max-width: 260px; border-radius: 8px; border: 1.5px solid var(--border);"></p>
