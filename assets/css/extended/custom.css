@@ -306,46 +306,32 @@ a[href*="/day-log/"] .entry-header h2,
 }
 
 /* ==========================================
-   Book Log CSSのみで完全自動ナンバリング（バッジ風・修正版）
+   Book Log Hugo自動抽出バッジ（手動追加ゼロ仕様）
    ========================================== */
 
-/* 1. リスト全体（親要素）でカウンターを1回だけ初期化 */
-main,
-.main,
-#content,
-.list {
-    counter-reset: book-log-counter 0;
-}
-
-/* 2. book-log の記事カードが表示されるたびに +1 */
-.post-entry:has(a[href*="/book-log/book"]) {
-    counter-increment: book-log-counter;
-}
-
-/* 3. タイトル横にバッジを表示 */
-.post-entry:has(a[href*="/book-log/book"]) .post-title::before,
-.post-entry:has(a[href*="/book-log/book"]) .entry-header h2::before {
-    content: "VOL." counter(book-log-counter, decimal-leading-zero);
-    display: inline-block;
+.book-badge {
+    display: inline-flex;
+    align-items: center;
     font-family: "Georgia", serif;
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
+    font-style: italic;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
     color: var(--accent) !important;
-    background-color: var(--tertiary) !important;
-    border: 1px solid var(--border) !important;
-    padding: 2px 10px;
-    border-radius: 12px;
-    margin-right: 8px;
-    vertical-align: middle;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.7) !important;
+    border: 1px solid rgba(217, 104, 112, 0.35) !important;
+    padding: 1px 10px;
+    border-radius: 20px;
+    margin-right: 10px;
+    box-shadow: 0 2px 8px rgba(217, 104, 112, 0.12);
+    transform: translateY(-1px);
+    transition: all 0.25s ease;
 }
 
-/* 4. カードホバー時の見た目調整 */
-.post-entry:has(a[href*="/book-log/book"]):hover .post-title::before,
-.post-entry:has(a[href*="/book-log/book"]):hover .entry-header h2::before {
-    background-color: #ffffff !important;
-    border-color: #ffffff !important;
-    color: var(--accent) !important;
+/* ホバー時にバッジの色をアクセントカラーに反転 */
+.post-entry:hover .book-badge {
+    background: var(--accent) !important;
+    color: #ffffff !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 4px 12px rgba(217, 104, 112, 0.3);
 }
