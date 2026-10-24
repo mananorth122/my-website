@@ -8,39 +8,35 @@
   gtag('config', 'G-ESFQPL7RB9');
 </script>
 
-<!-- Book Log 自動バッジ生成スクリプト（強化版） -->
+<!-- Book Log 自動バッジ生成スクリプト -->
 <script>
 function renderBookBadges() {
-  // bookを含むすべてのリンクを取得
   const allLinks = document.querySelectorAll('a[href*="book"]');
   
   allLinks.forEach(link => {
     const href = link.getAttribute('href');
-    // URLから数字部分（book39 や book-39 など）を抽出
     const match = href.match(/book[-_]?([0-9]+)/i);
     
     if (match && match[1]) {
       const num = match[1].padStart(2, '0');
       
-      // すでにバッジが付いていない場合のみ追加
       if (!link.querySelector('.book-badge')) {
         const badge = document.createElement('span');
         badge.className = 'book-badge';
         badge.textContent = `Vol.${num}`;
         
-        // 記事カード内の h2 または .post-title を探す
-        const title = link.querySelector('h2, .post-title, .entry-title') || link;
-        if (title !== link) {
-          title.prepend(badge);
+        // タイトル要素（h2など）の中に直接バッジを挿入する
+        const titleTarget = link.querySelector('h2, .post-title, .entry-title');
+        if (titleTarget) {
+          titleTarget.insertBefore(badge, titleTarget.firstChild);
         } else {
-          link.prepend(badge);
+          link.insertBefore(badge, link.firstChild);
         }
       }
     }
   });
 }
 
-// ページ読み込み完了時および即時実行
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', renderBookBadges);
 } else {
