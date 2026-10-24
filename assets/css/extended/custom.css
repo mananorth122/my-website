@@ -306,47 +306,47 @@ a[href*="/day-log/"] .entry-header h2,
 }
 
 /* ==========================================
-   Book Log 自動生成バッジ（ブロック体＆横並び整列）
+   Book Log 自動生成バッジ（静的・シンプル配置）
    ========================================== */
 
-/* タイトル要素自体をフレキシブルに横並び配置 */
+/* 1. タイトル行をきれいに横並び */
+.post-entry .entry-header,
 .post-entry .entry-header h2,
 .post-entry .post-title {
     display: flex !important;
     align-items: center !important;
-    flex-wrap: wrap !important;
+    flex-direction: row !important;
     gap: 8px !important;
+    margin: 0 0 8px 0 !important;
+    position: static !important;
 }
 
-/* バッジ本体：すっきりしたブロック体デザイン */
+/* 2. バッジ本体（静的デザイン・ホバー変化なし） */
 .book-badge {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    position: static !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
     
-    /* フォント指定：イタリック（斜体）をやめてブロック体に */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    font-style: normal;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.06em;
-    line-height: 1;
+    /* フォント：ブロック体・ノーマル */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+    font-style: normal !important;
+    font-size: 0.72rem !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    letter-spacing: 0.05em !important;
     
-    /* 配色と形状 */
-    color: var(--accent);
-    background-color: var(--tertiary);
-    border: 1px solid var(--border);
-    padding: 3px 8px;
-    border-radius: 12px;
+    /* 配色・形状（動かない固定値） */
+    color: var(--accent) !important;
+    background-color: var(--tertiary) !important;
+    border: 1px solid var(--border) !important;
+    padding: 3px 8px !important;
+    border-radius: 12px !important;
     
-    /* 位置調整 */
-    flex-shrink: 0;
-    transition: all 0.2s ease;
-}
-
-/* カードホバー時にバッジを反転表示 */
-.post-entry:hover .book-badge {
-    background-color: var(--accent);
-    color: #ffffff;
-    border-color: var(--accent);
+    /* 変形やアニメーションを完全に無効化 */
+    flex-shrink: 0 !important;
+    margin: 0 !important;
+    transform: none !important;
+    transition: none !important;
+    box-shadow: none !important;
 }
