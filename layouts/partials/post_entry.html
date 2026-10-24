@@ -1,3 +1,8 @@
-{{ if strings.Contains .RelPermalink "/book-log/book" }}
-  <span class="book-badge">Vol.{{ printf "%02d" (int (replaceRE `[^0-9]` "" .RelPermalink)) }}</span>
+{{/* URLまたはPermalinkの中に /book-log/book が含まれるか判定 */}}
+{{ $path := .RelPermalink | default .Permalink }}
+{{ if strings.Contains $path "/book-log/book" }}
+  {{ $num := replaceRE `.*book-log/book([0-9]+).*` "$1" $path }}
+  {{ if $num }}
+    <span class="book-badge">Vol.{{ printf "%02d" (int $num) }}</span>
+  {{ end }}
 {{ end }}
