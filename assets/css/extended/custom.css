@@ -306,24 +306,23 @@ a[href*="/day-log/"] .entry-header h2,
 }
 
 /* ==========================================
-   Book Log CSSのみで完全自動ナンバリング（バッジ風）
+   Book Log CSSのみで完全自動ナンバリング（バッジ風・修正版）
    ========================================== */
 
-/* 1. 一覧リスト全体でカウンターをリセット */
-.first-entry,
-.post-entry,
-.list-page,
-main {
-    counter-reset: book-log-counter;
+/* 1. リスト全体（親要素）でカウンターを1回だけ初期化 */
+main,
+.main,
+#content,
+.list {
+    counter-reset: book-log-counter 0;
 }
 
-/* 2. book-log の記事カードだけを順番にカウントアップ */
+/* 2. book-log の記事カードが表示されるたびに +1 */
 .post-entry:has(a[href*="/book-log/book"]) {
     counter-increment: book-log-counter;
-    position: relative;
 }
 
-/* 3. タイトル横にバッジを自動生成 */
+/* 3. タイトル横にバッジを表示 */
 .post-entry:has(a[href*="/book-log/book"]) .post-title::before,
 .post-entry:has(a[href*="/book-log/book"]) .entry-header h2::before {
     content: "VOL." counter(book-log-counter, decimal-leading-zero);
@@ -343,7 +342,7 @@ main {
     transition: all 0.2s ease;
 }
 
-/* 4. カードホバー時にバッジが見やすくなる調整 */
+/* 4. カードホバー時の見た目調整 */
 .post-entry:has(a[href*="/book-log/book"]):hover .post-title::before,
 .post-entry:has(a[href*="/book-log/book"]):hover .entry-header h2::before {
     background-color: #ffffff !important;
