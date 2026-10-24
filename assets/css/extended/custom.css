@@ -306,35 +306,30 @@ a[href*="/day-log/"] .entry-header h2,
 }
 
 /* ==========================================
-   Book Log 完全独立型バッジ（重ね塗り・被り防止）
+   Book Log バッジ：カード内の完全右端配置
    ========================================== */
 
-/* 1. カードの見出し行を強制的に横並びレイアウトにする */
-.post-entry .entry-header {
+/* 1. タイトル行を横並びFlexにし、両端揃え（space-between）に指定 */
+.post-entry .entry-header h2,
+.post-entry .post-title,
+.post-entry h2 {
     display: flex !important;
     align-items: center !important;
-    gap: 10px !important;
-    margin-bottom: 8px !important;
-}
-
-/* 2. 見出し文字（h2）側の位置調整 */
-.post-entry .entry-header h2,
-.post-entry .post-title {
-    display: inline !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    justify-content: space-between !important; /* タイトルを左、バッジを完全右へ */
+    width: 100% !important;
+    gap: 12px !important;
+    margin: 0 0 8px 0 !important;
     position: static !important;
 }
 
-/* 3. 被りを発生させるテーマ側の疑似要素（::before）を完全無効化 */
-.post-entry .entry-header h2::before,
-.post-entry .post-title::before,
-a[href*="book"]::before {
+/* 2. テーマ側の不要な疑似要素を無効化 */
+.post-entry h2::before,
+.post-entry .post-title::before {
     content: none !important;
     display: none !important;
 }
 
-/* 4. バッジ本体（静的・ブロック体・重なり完全解除） */
+/* 3. バッジ本体（右端固定・静的） */
 .book-badge {
     position: static !important;
     display: inline-flex !important;
@@ -356,9 +351,10 @@ a[href*="book"]::before {
     padding: 3px 8px !important;
     border-radius: 12px !important;
     
-    /* フレックス配置の設定 */
+    /* 右端に押し出す設定 */
+    margin-left: auto !important;
     flex-shrink: 0 !important;
-    margin: 0 !important;
     transform: none !important;
+    transition: none !important;
     box-shadow: none !important;
 }
