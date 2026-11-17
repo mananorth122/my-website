@@ -1,17 +1,15 @@
 <div id="popular-posts-container">
-  <p>読み込み中...</p>
+  <p style="opacity: 0.8; font-size: 0.9em;">読み込み中...</p>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-  // 1. Hugoのビルド時に "day-log" セクションの全記事データを埋め込む
   const posts = [
     {{ range where .Site.RegularPages "Section" "day-log" }}
     {
       title: {{ .Title }},
       url: {{ .RelPermalink }},
       date: {{ .Date.Format "2006-01-02" }},
-      // url = "/day-log/464/" からスラッシュをハイフンに変換して "day-log-464" を生成
       id: {{ trim .RelPermalink "/" | replaceRE "/" "-" }}
     },
     {{ end }}
@@ -20,43 +18,42 @@ document.addEventListener("DOMContentLoaded", async () => {
   const container = document.getElementById("popular-posts-container");
 
   try {
-    // 2. Cloudflare Functionsから全いいね数を取得
     const res = await fetch("/like?id=all");
     if (!res.ok) throw new Error("Failed to fetch likes");
     const likesMap = await res.json();
 
-    // 3. いいね数を紐付け、1いいね以上の記事をいいね順（同数なら新しい順）にソート
     const rankedPosts = posts
       .map(post => ({
         ...post,
         likes: likesMap[post.id] || 0
       }))
-      .filter(post => post.likes > 0) // 1いいね以上ある記事のみ表示
+      .filter(post => post.likes > 0)
       .sort((a, b) => {
         if (b.likes !== a.likes) return b.likes - a.likes;
         return b.date.localeCompare(a.date);
       })
-      .slice(0, 5); // 上位5件を取得
+      .slice(0, 5);
 
-    // 4. HTMLとして描画
     if (rankedPosts.length === 0) {
-      container.innerHTML = "<p>まだいいねされた記事はありません。</p>";
+      container.innerHTML = `<p style="opacity: 0.8; font-size: 0.9em;">まだいいねされた記事はありません。</p>`;
       return;
     }
 
-    const ul = document.createElement("ul");
-    rankedPosts.forEach(post => {
-      const li = document.createElement("li");
-      li.innerHTML = `<a href="${post.url}">${post.title}</a> <span style="font-size: 0.9em; color: #666;">（♥ ${post.likes}）</span>`;
-      ul.appendChild(li);
-    });
-
     container.innerHTML = "";
-    container.appendChild(ul);
+    rankedPosts.forEach(post => {
+      const div = document.createElement("div");
+      div.style.marginBottom = "0.5em";
+      div.innerHTML = `
+        <span style="opacity: 0.8; font-size: 0.9em; margin-right: 0.5em;">${post.date}：</span>
+        <a href="${post.url}" style="font-weight: 500;">${post.title}</a>
+        <span style="opacity: 0.8; font-size: 0.9em; margin-left: 0.5em;">♥ ${post.likes}</span>
+      `;
+      container.appendChild(div);
+    });
 
   } catch (e) {
     console.error(e);
-    container.innerHTML = "<p>記事を読み込めませんでした。</p>";
+    container.innerHTML = `<p style="opacity: 0.8; font-size: 0.9em;">記事を読み込めませんでした。</p>`;
   }
 });
 </script>
