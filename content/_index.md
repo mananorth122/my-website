@@ -19,3 +19,9 @@ Email: mkitazawa@kyoritsu-wu.ac.jp
 **最新の Day Log**
 
 {{< recent-posts >}}
+
+---
+
+**人気の Day Log**
+
+{{< popular-posts >}}
